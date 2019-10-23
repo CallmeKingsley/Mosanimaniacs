@@ -5,13 +5,18 @@ import { connect } from 'react-redux';
 import history from './history/history';
 import Welcome from './components/Welcome';
 
+import Quiz from './components/quiz/Quiz';
+
 class App extends Component {
   render() {
     return (
       <div>
-        <p>This is a test</p>
         <Router history={history}>
-          <Route exact path="/home" component={Welcome}></Route>
+          <Nav />
+          <Switch>
+            <Route exact path="/home" component={Welcome}></Route>
+            <Route path="/" component={Quiz}></Route>
+          </Switch>
         </Router>
       </div>
     )
