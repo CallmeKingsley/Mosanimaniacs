@@ -6,8 +6,8 @@ import history from './history/history';
 import Welcome from './components/quiz/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Quiz from './components/quiz/Quiz';
-//import Question from './components/Question';
-// import Conclusion from './components/Conclusion';
+import Question from './components/quiz/Question';
+import Conclusion from './components/quiz/Conclusion';
 import './App.css';
 
 
@@ -17,10 +17,10 @@ class App extends Component {
       <div className="container-fluid">
         <Router history={history}>
           <Switch>
-            <Route exact path="/home" component={Welcome}></Route>{/* A component that says "welcome to this app" or something */}
+            <Route exact path="/" component={Welcome}></Route>{/* A component that says "welcome to this app" or something */}
             <Route exact path="/quiz" component={Quiz}></Route>{/* The menu where you can select the topic (DC Theory, Codes, etc) */}
-            {/*<Route path="/quiz/question/:id" component={Question}></Route> The indiviudal questions */}
-            {/*<Route path="/conclusion" component={Conclusion}></Route> The final score screen */}
+            <Route path="/quiz/question/:id" component={Question}></Route> {/* The indiviudal questions*/}
+            <Route path="/conclusion" component={Conclusion}></Route> {/* The final score screen */}
           </Switch>
         </Router>
       </div>

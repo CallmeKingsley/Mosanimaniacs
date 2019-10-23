@@ -8,18 +8,18 @@ class Quiz extends Component {
             <div>
                 <h1>Select a topic to begin!</h1>
                 <div className="topic-selection">
-                    <Link to="/home">
+                    <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
                         <img src={require('../../images/icon_BP.png')} alt="Blueprints"></img>
-                    </Link>
-                    <Link to="/home">
+                    </a>
+                    <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
                         <img src={require('../../images/icon_CS.png')} alt="Codes and Safety"></img>
-                    </Link>
-                    <Link to="/home">
+                    </a>
+                    <Link to="/quiz/question/:id">
                         <img src={require('../../images/icon_DC.png')} alt="DC Theory"></img>
                     </Link>
-                    <Link to="/home">
+                    <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
                         <img src={require('../../images/icon_JI.png')} alt="Job Information"></img>
-                    </Link>
+                    </a>
                 </div>
             </div>
         )
