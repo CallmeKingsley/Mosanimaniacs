@@ -5,8 +5,7 @@ class Welcome extends Component {
     render() {
         return (
             <div>
-                <h1>Welcome to the quiz customizer app</h1>
-                <a href="/quiz">Click here to take the quiz</a>
+     
             </div>
         )
     }

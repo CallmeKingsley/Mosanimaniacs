@@ -4,15 +4,15 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from './history/history';
 import Welcome from './components/Welcome';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Quiz from './components/quiz/Quiz';
+import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Router history={history}>
-          <Nav />
           <Switch>
             <Route exact path="/home" component={Welcome}></Route>
             <Route path="/" component={Quiz}></Route>
