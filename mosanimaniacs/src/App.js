@@ -14,7 +14,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <Router history={history}>
           <Switch>
             <Route exact path="/home" component={Welcome}></Route>{/* A component that says "welcome to this app" or something */}
