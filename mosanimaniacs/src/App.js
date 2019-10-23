@@ -3,9 +3,14 @@ import { Route, Switch, Link, BrowserHistory } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from './history/history';
-import Welcome from './components/Welcome';
 
+import Nav from './components/navigation/Nav';
+
+import Welcome from './components/Welcome';
 import Quiz from './components/quiz/Quiz';
+import Question from './components/Question';
+import Conclusion from './components/Conclusion';
+
 
 class App extends Component {
   render() {
@@ -15,7 +20,9 @@ class App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/home" component={Welcome}></Route>
-            <Route path="/" component={Quiz}></Route>
+            <Route exact path="/quiz" component={Quiz}></Route>
+            <Route path="/quiz/question/:id" component={Question}></Route>
+            <Route path="/conclusion" component={Conclusion}></Route>
           </Switch>
         </Router>
       </div>
@@ -27,6 +34,7 @@ class App extends Component {
 
   //   }
   // }
+  //oh hai mark
 }
 
 export default App;
