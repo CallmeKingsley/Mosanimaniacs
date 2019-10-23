@@ -1,4 +1,3 @@
-const mongoose = require('mongoose'); // eslint-disable-line import/no-commonjs
 const express = require('express'); // eslint-disable-line import/no-commonjs
 const Question = require('../models/Questions');
 // eslint-disable-line import/no-commonjs
@@ -22,10 +21,9 @@ router.get('/',
 // eslint-disable-next-line no-unused-vars
 router.post('/', (req, res) => {
   const user = new Question({
-    questionId: new mongoose.Types.ObjectId(),
     Question: req.body.question,
     Options: req.body.option,
-    Answers: req.body.answer,
+    Answer: req.body.answer,
   });
 
   user
