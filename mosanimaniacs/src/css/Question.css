@@ -24,6 +24,28 @@
     margin-bottom: 50px;
 }
 
+.headerContainer{
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#profileImg{
+    background-image:url("../images/userName.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 213px;
+    height: 50px;
+}
+
+#schoolName{
+    color: #909291;
+}
 
 .navyBlue{
     background: #40798C;
@@ -87,6 +109,15 @@
     width: 378px;
 }
 
+#score{
+    background-image:url("../images/scoreBoard.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 378px;
+    margin-top: 45px;
+}
+
+
 #countdown{
     font-size: 146.4px;
     text-align: center;
@@ -101,10 +132,21 @@
     color: white;
 }
 
-#score{
-    margin-right: 0;
-
+#value{
+    font-size: 24px;
+    margin-top:100px;
+    text-align: center;
+    color: black;
 }
+
+
+#addPoints{
+    font-size: 52px;
+    margin-top:-15px;
+    text-align: center;
+    color: #70A9A2;
+}
+
 
 
 
