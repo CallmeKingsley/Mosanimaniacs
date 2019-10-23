@@ -14,7 +14,7 @@ class Quiz extends Component {
                     <Link to="/home">
                         <img src={require('../../images/icon_CS.png')} alt="Codes and Safety"></img>
                     </Link>
-                    <Link to="/home">
+                    <Link to="/quiz/question/:id">
                         <img src={require('../../images/icon_DC.png')} alt="DC Theory"></img>
                     </Link>
                     <Link to="/home">

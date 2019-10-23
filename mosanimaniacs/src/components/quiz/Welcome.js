@@ -7,6 +7,7 @@ class Welcome extends Component {
     render() {
         return (
             <div id="welcome">
+            
                 <div className="row">
                     <div className="col-sm text-center welcomeText">
                         Welcome to our game
@@ -14,7 +15,7 @@ class Welcome extends Component {
                 </div>
                 <div className="row">
                     <div className="col-sm text-center startBtn">
-                        <Link to ="/quiz"><button type="button" class="btn btn-primary">START GAME</button></Link>
+                        <Link to ="/quiz"><button type="button" class="btn btn-primary">SIGN IN</button></Link>
                     </div>
                 </div>
             </div>
