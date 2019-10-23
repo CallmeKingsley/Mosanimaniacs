@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Route, Switch, Link, BrowserHistory } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { connect } from 'react-redux';
+import history from './history/history';
+import Welcome from './components/Welcome';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       <h>Front End</h>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Router history={history}>
+          <Route exact path="/home" component={Welcome}></Route>
+        </Router>
+      </div>
+    )
+  }
+
+  // function mapStateToProps(state) {
+  //   return {
+
+  //   }
+  // }
 }
 
 export default App;
