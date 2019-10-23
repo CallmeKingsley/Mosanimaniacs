@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class Quiz extends Component {
+class Question extends Component {
     render() {
         return (
             <div>
@@ -12,4 +12,4 @@ class Quiz extends Component {
     }
 }
 
-export default Quiz;
+export default Question;

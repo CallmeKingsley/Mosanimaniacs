@@ -3,7 +3,7 @@ import { Route, Switch, Link, BrowserHistory } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from './history/history';
-import Welcome from './components/Welcome';
+import Welcome from './components/quiz/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Quiz from './components/quiz/Quiz';
 //import Question from './components/Question';
@@ -14,7 +14,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <Router history={history}>
           <Switch>
             <Route exact path="/home" component={Welcome}></Route>{/* A component that says "welcome to this app" or something */}
