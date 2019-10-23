@@ -18,26 +18,27 @@ router.get('/',
       });
   });
 
-// eslint-disable-next-line no-unused-vars
-router.post('/', (req, res) => {
-  const user = new Question({
-    Question: req.body.question,
-    Options: req.body.option,
-    Answer: req.body.answer,
-  });
 
-  user
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: 'Handling POST requests to /user',
-        createdUser: result,
-      });
+const createQuestions = (data) => {
+  return data.map((question) => {
+    const newQuestion = new Question({
+      Question: question.Question,
+      Options: question.Options,
+      Answer: question.Answer,
+    });
+    
+    return newQuestion.save()
+  });
+}
+
+router.post('/', (req, res) => {
+  Promise
+    .all(createQuestions(req.body))
+    .then(questions => {
+      res.status(201).json(questions);
     })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
+    .catch(error => {
+      res.status(500).json(error);
     });
 });
 
