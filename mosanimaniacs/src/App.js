@@ -19,8 +19,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/home" component={Welcome}></Route>{/* A component that says "welcome to this app" or something */}
             <Route exact path="/quiz" component={Quiz}></Route>{/* The menu where you can select the topic (DC Theory, Codes, etc) */}
-            <Route path="/quiz/question/:id" component={Question}></Route>{/* The indiviudal questions */}
-            <Route path="/conclusion" component={Conclusion}></Route>{/* The final score screen */}
+            {/*<Route path="/quiz/question/:id" component={Question}></Route> The indiviudal questions */}
+            {/*<Route path="/conclusion" component={Conclusion}></Route> The final score screen */}
           </Switch>
         </Router>
       </div>
