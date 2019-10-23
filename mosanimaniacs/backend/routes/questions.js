@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
   const user = new Question({
     Question: req.body.question,
     Options: req.body.option,
-    Answers: req.body.answer,
+    Answer: req.body.answer,
   });
 
   user

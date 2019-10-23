@@ -1,4 +1,3 @@
-const mongoose = require('mongoose'); // eslint-disable-line import/no-commonjs
 const express = require('express'); // eslint-disable-line import/no-commonjs
 const User = require('../models/User');
 // eslint-disable-line import/no-commonjs
