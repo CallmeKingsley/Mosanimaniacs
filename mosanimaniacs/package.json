@@ -43,5 +43,9 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
     "react-dev-utils": "^9.1.0"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
 }

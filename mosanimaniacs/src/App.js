@@ -9,6 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <p>This is a test</p>
         <Router history={history}>
           <Route exact path="/home" component={Welcome}></Route>
         </Router>
