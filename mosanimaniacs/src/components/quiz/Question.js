@@ -1,24 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {getQuestions} from '../../redux/actions/index';
+//import {getQuestions} from '../../redux/actions/index';
 
 class Question extends Component {
+
+    // componentWillMount() {
+    //     console.log(this.props.questions);
+    // }
+
     render() {
+        if (this.props.questions) {
+            console.log(this.props.questions[0]);
+        }
         //const getQuestions = bindActionCreators(ActionCreators.getQuestions, dispatch);
         return (
             <div>
-                <button onClick={() => this.props.getQuestions('/api/users')}>Oh hai Mark</button>
+                <button>Oh hai Mark</button>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
+    const questions = state.questions.data;
     return {
-        state
+        questions: questions
     }
 }
 
-export default connect(mapStateToProps,{
-    getQuestions
-})(Question);
+export default connect(mapStateToProps)(Question);
