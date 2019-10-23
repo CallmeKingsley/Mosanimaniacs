@@ -4,14 +4,21 @@ import './index.css';
 import App from './App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './redux/reducers/index';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const middleware = applyMiddleware(reduxThunk);
+
+const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
     rootReducer,
-    window.devToolsExtension && window.devToolsExtension()
+    reduxDevTools (
+        middleware
+    )
 )
 
 render(

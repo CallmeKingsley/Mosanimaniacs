@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {getQuestions} from '../../redux/actions/index';
 
 class Question extends Component {
     render() {
+        //const getQuestions = bindActionCreators(ActionCreators.getQuestions, dispatch);
         return (
             <div>
-                <h1>Welcome to the quiz customizer app</h1>
-                <a href="/quiz">Click here to take the quiz</a>
+                <button onClick={() => this.props.getQuestions('/api/users')}>Oh hai Mark</button>
             </div>
         )
     }
 }
 
-export default Question;
+function mapStateToProps(state) {
+    return {
+        state
+    }
+}
+
+export default connect(mapStateToProps,{
+    getQuestions
+})(Question);

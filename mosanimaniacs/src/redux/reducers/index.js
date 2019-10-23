@@ -1,12 +1,20 @@
 import { combineReducers } from 'redux';
-import { welcome } from '../action/types';
+import { questions } from '../actions/types';
 
 const INITIAL_STATE = {
-message: 'Hello World'
+    welcome: 'Hello World',
+    questions: '',
+    selectedQuestion: '',
+    selectedQuestionIndex: 0,
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case questions.GETQUESTIONS:
+            return {
+                ...state,
+                questions: action.payload
+            }
         default:
             return state;
     }

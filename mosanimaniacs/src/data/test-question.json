@@ -1,0 +1,84 @@
+[{
+    "_id": "5d9a6c01475e0d068a949870",
+    "Question": "The flux lines of a magnet leave the _____ end and enter the _____ end",
+    "Options": [
+        "North; north",
+        "South; north",
+        "North; south",
+        "South; south"
+    ],
+    "Answer": "North, south",
+    "__v": 0
+},
+{
+    "_id": "6057f13c496ecf7fd777ceb9",
+    "Question" : "Circular mils are the units used to measure the ____.",
+    "Options" : [
+        "voltage drop of American conductors to and from the load", 
+        "length of American conductors",
+        "cross-sectional area of American conductors",
+        "resistance of wire"
+    ],
+    "Answer": "cross-sectional area of American conductors",
+    "__v": 0
+},
+{
+    "_id": "912ec803b2ce49e4a541068d",
+    "Question" : "What does the formula R=(K×L)/A calculate?",
+    "Options" : [
+        "Current flow", 
+        "Load value",
+        "Area of wires or conductors",
+        "Resistance of a wire or conductor"
+    ],
+    "Answer": "Resistance of a wire or conductor",
+    "__v": 0
+},
+{
+    "_id": "eff7d5dba32b4da32d9a67a5",
+    "Question" : "The ____ a lamp’s resistance, the ____ a lamp’s wattage.",
+    "Options" : [
+        "lower; higher", 
+        "higher; lower",
+        "higher; higher",
+        "lower; lower"
+    ],
+    "Answer": "higher; lower",
+    "__v": 0
+},
+{
+    "_id": "8fa14cdd754f91cc6554c9e7",
+    "Question" : "Lamps with the same value of resistance can have different wattage ratings if the _______ ratings are different.",
+    "Options" : [
+        "power", 
+        "current",
+        "resistance",
+        "voltage"
+    ],
+    "Answer": "voltage",
+    "__v": 0
+},
+{
+    "_id": "f0118e9bd2c4fb29c64ee03a",
+    "Question" : "An open circuit _______.",
+    "Options" : [
+        "always provides more than one possible path for the current to flow from the source and back", 
+        "allows the current to take a shorter path back to the source, avoiding the opposition of the load",
+        "allows the current to flow to the intended destination through the load and back to the source",
+        "is a circuit that has no current flowing through it"
+    ],
+    "Answer": "is a circuit that has no current flowing through it",
+    "__v": 0
+},
+{
+    "_id": "631996e5a547675f6a95e8b8",
+    "Question" : "A short circuit _______.",
+    "Options" : [
+        "always provides more than one possible path for the current to flow from the source and back", 
+        "allows the current to take a shorter path back to the source, avoiding the opposition of the load",
+        "allows the current to flow to the intended destination through the load and back to the source",
+        "is a circuit that has no current flowing through it"
+    ],
+    "Answer": "allows the current to take a shorter path back to the source, avoiding the opposition of the load",
+    "__v": 0
+}]
