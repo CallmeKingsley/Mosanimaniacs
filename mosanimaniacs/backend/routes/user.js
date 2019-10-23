@@ -29,7 +29,6 @@ router.get('/',
 // eslint-disable-next-line no-unused-vars
 router.post('/', (req, res) => {
   const user = new User({
-    _id: new mongoose.Types.ObjectId(),
     Email: req.body.email,
     Password: req.body.password,
     Name: req.body.name,

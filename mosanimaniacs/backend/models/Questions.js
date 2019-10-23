@@ -4,7 +4,7 @@ const QuestionSchema = mongoose.Schema({
   questionId: mongoose.Schema.Types.ObjectId,
   Question: String,
   Options: [],
-  Answers: String,
+  Answer: String,
 });
 
 module.exports = mongoose.model('tempQuestionSchema', QuestionSchema);
