@@ -7,8 +7,9 @@ module.exports = {
      * @param {*} req 
      * @param {*} res 
      */
-    getUser(req,res){
-    
+  getUser(req,res){
+    console.log('getUser()');
+        
         UserModel.find()
         .exec()
         .then(docs => {
@@ -16,8 +17,7 @@ module.exports = {
             //   if (docs.length >= 0) {
             res.status(200).json(docs);
             //   } else {
-            //       res.status(404).json({
-            //           message: 'No entries found'
+            //       res.status(404).json({            //           message: 'No entries found'
             //       });
             //   }
         })
