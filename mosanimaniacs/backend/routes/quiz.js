@@ -1,12 +1,12 @@
 const express = require('express'); // eslint-disable-line import/no-commonjs
-const Question = require('../models/Questions');
+const Quiz = require('../models/Quiz');
 // eslint-disable-line import/no-commonjs
 const router = express.Router();
 
 
 router.get('/',
   (req, res) => {
-    Question.find()
+    Quiz.find()
       .exec()
       .then((docs) => {
         res.status(200).json(docs);
@@ -20,13 +20,11 @@ router.get('/',
 
 // eslint-disable-next-line no-unused-vars
 router.post('/', (req, res) => {
-  const newQuestion = new Question({
-    Question: req.body.question,
-    Options: req.body.option,
-    Answer: req.body.answer,
+  const newQuiz = new Quiz({
+    quizName: req.body.quizName,
+    quizQuestions: req.body.questions,
   });
-
-  newQuestion
+  newQuiz
     .save()
     .then((result) => {
       res.status(201).json({
@@ -41,9 +39,9 @@ router.post('/', (req, res) => {
     });
 });
 
-router.get('/:  questionId', (req, res) => {
-  const id = req.params.questionId;
-  Question.findById(id)
+router.get('/:quizId', (req, res) => {
+  const id = req.params.quizId;
+  Quiz.findById(id)
     .exec()
     .then((doc) => {
       if (doc) {
