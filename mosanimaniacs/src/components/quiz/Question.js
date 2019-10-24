@@ -4,18 +4,35 @@ import { connect } from "react-redux";
 
 class Question extends Component {
 
+    constructor(props) {
+        super(props);
+        //this.renderAnswerChoices = this.renderAnswerChoices.bind(this);
+    }
+
     // componentWillMount() {
     //     console.log(this.props.questions);
     // }
 
+    // renderAnswerChoices() {
+    //     selectedQuestion.Question.forEach(element => {
+            
+    //     });
+    // }
+
     render() {
-        if (this.props.questions) {
-            console.log(this.props.questions[0]);
-        }
+        const { question, index, selectedQuestion } = this.props;
+        console.log(selectedQuestion);
         //const getQuestions = bindActionCreators(ActionCreators.getQuestions, dispatch);
         return (
             <div>
-                <button>Oh hai Mark</button>
+                <h2>{selectedQuestion.Question}</h2>
+                <ul className="answer-choices">
+                    {
+                        selectedQuestion.Options.map((el,i) => (
+                            <li key={i}>{el}</li>
+                        )
+                    )}
+                </ul>
             </div>
         )
     }
@@ -23,8 +40,12 @@ class Question extends Component {
 
 function mapStateToProps(state) {
     const questions = state.questions.data;
+    const index = state.selectedQuestionIndex;
+    const selectedQuestion = questions[index];
     return {
-        questions: questions
+        questions: questions,
+        index: index,
+        selectedQuestion: selectedQuestion
     }
 }
 
