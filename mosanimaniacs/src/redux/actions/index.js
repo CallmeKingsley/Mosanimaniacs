@@ -16,3 +16,7 @@ export const getQuestions = url => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const nextQuestion = num => dispatch => {
+    dispatch({type: questions.NEXTQUESTION, payload: num})
+}   

@@ -3,5 +3,6 @@ export const welcome = {
 };
 
 export const questions = {
-    GETQUESTIONS: 'GETQUESTIONS'
+    GETQUESTIONS: 'GETQUESTIONS',
+    NEXTQUESTION: 'NEXTQUESTION'
 };

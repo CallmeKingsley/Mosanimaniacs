@@ -15,6 +15,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 questions: action.payload
             }
+        case questions.NEXTQUESTION:
+            return {
+                ...state,
+                selectedQuestionIndex: state.selectedQuestionIndex + action.payload
+            }
         default:
             return state;
     }
