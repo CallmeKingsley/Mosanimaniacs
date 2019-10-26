@@ -17,6 +17,6 @@ export const getQuestions = url => async (dispatch) => {
     }
 }
 
-export const nextQuestion = num => dispatch => {
-    dispatch({type: questions.NEXTQUESTION, payload: num})
+export const changeQuestion = num => dispatch => {
+    dispatch({type: questions.CHANGEQUESTION, payload: num})
 }   

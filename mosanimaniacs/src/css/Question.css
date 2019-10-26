@@ -1,13 +1,4 @@
-/* .image{
-    background-image:url("../images/Main_Screen.jpg");
-    z-index:1000;
-    position: absolute;
-    top:0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    opacity: 0.3;
-} */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 .lightGreen{
     position: relative;
@@ -48,12 +39,24 @@
 }
 
 .navyBlue{
+    display: flex;
+    align-items: center;
     background: #40798C;
     width: 93%;
     height: 13%;
     margin: 35px auto 0 auto;
     border-radius: 20px;
     border: solid #70A9A2 5px;
+}
+
+.navyBlue h2,
+.answer p {
+    color: #CDE0C4;
+    margin: 0 0 0 2rem;
+}
+
+.quizText {
+    font-family: 'Open Sans', sans-serif;
 }
 
 .question-points-section{
@@ -80,6 +83,10 @@
     height: 100px;
     border-radius: 280px;
     margin-bottom: 40px;
+}
+
+.answer p {
+    font-size: 1.5rem;
 }
 
 .circle{
