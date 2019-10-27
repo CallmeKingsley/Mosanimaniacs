@@ -108,7 +108,7 @@
 
 #time{
     margin-right: 30px;
-    margin-left: -125px;
+    margin-left: -65px;
     margin-top: 35px;
     background-image:url("../images/timerCircle.png");
     background-repeat: no-repeat;
@@ -128,8 +128,17 @@
 #countdown{
     font-size: 146.4px;
     text-align: center;
-    margin-top:90px;
+    margin-top: 45px;
     color: white;
+}
+
+#countdown input {
+    width: 200px;
+    height: 130px;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    border: none;
 }
 
 #seconds{
@@ -146,10 +155,48 @@
     color: black;
 }
 
-
 #addPoints{
     font-size: 52px;
     margin-top:-15px;
     text-align: center;
     color: #70A9A2;
+}
+
+.question-btn {
+    display: flex;
+    align-items: center;
+    background-color: #40798C;
+    border-radius: 20px;
+    border: solid #70A9A2 5px;
+    transition: .3s;
+    position: absolute;
+    bottom: 50px;
+    padding: 10px;
+    font-size: 1.35rem;
+    color: #CDE0C4;
+
+}
+
+.next-question {
+    right: 42px;
+}
+
+.prev-question {
+    right: 260px;
+}
+
+.question-btn:hover {
+    transition: .3s;
+    transform: scale(1.1);
+    text-decoration: none;
+    color: #CDE0C4;
+}
+
+.disabled {
+    background-color: rgba(64, 121, 140, 0.5);
+    pointer-events: none;
+}
+
+.disabled:hover {
+    transform: none;
 }

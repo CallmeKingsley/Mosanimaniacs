@@ -17,19 +17,49 @@ import Countdown from 'react-countdown-now';
 class Question extends Component {
 
     componentDidMount() {
-        this.pointDecrease(this.state.total, this.state.newNum);
+        this.startTimer();
     }
 
     constructor(props) {
         super(props);
         this.incrementOptionIndex = this.incrementOptionIndex.bind(this);
         this.pointDecrease = this.pointDecrease.bind(this);
-        this.updateTimer = this.updateTimer.bind(this);
-        this.input = React.createRef();
+        this.timer = 0;
+        this.startTimer = this.startTimer.bind(this);
+        this.countDown = this.countDown.bind(this);
         this.state = {
             total: 500,
-            newNum: 10,
-            //timeLeft: 30
+            seconds: 30
+        }
+    }
+
+    startTimer() {
+        if (this.timer == 0 && this.state.seconds > 0) {
+          this.timer = setInterval(this.countDown, 1000);
+        }
+    }
+
+    countDown() {
+        // Remove one second, set state so a re-render happens.
+        let seconds = this.state.seconds - 1;
+        this.setState({
+          seconds: seconds,
+        });
+        
+        // Check if we're at zero.
+        switch (seconds) {
+            case 20:
+            case 17:
+            case 14:
+            case 11:
+            case 8:
+            case 5:
+            case 2:
+                this.pointDecrease(50);
+                break;
+            case 0: 
+                clearInterval(this.timer);
+                break;
         }
     }
 
@@ -50,45 +80,15 @@ class Question extends Component {
         }
     }
 
-    pointDecrease(tot, nuevo){
-        tot = tot - nuevo;
-        return tot;
+    pointDecrease(num){
+        console.log('hey');
+        this.setState({total: this.state.total - num});
     }
-
-    updateTimer() {
-
-        // this.setState(prevState => {
-        //     return prevState--;
-        // })
-        console.log(this.timeLeft);
-    }
-    // pointDecrease(tot, new){
-    //     total = total - newNum;
-    //     return total;
-    // }
 
     render() {
         const { question, index, selectedQuestion } = this.props;
         const incIndex = index + 1;
         const decIndex = index - 1;
-        let timeLeft;
-
-        //const span = React.createRef();
-        // const span = document.querySelector('span');
-        // let config = { attributes: true, childList: true, subtree: true };
-        // let observer = new MutationObserver((sec) => {
-        //     this.updateTimer();
-        // });
-        // observer.observe(span, config);
-
-        const renderer = ({ seconds }) => {
-            // return <WatchContent
-            // onChange={this.updateTimer()}>
-            //     <span ref={this.span}>{seconds}</span>
-            // </WatchContent>;
-            this.timeLeft = seconds;
-            return [<input disabled value={seconds} onChange={this.updateTimer()} ref={this.input}/>, timeLeft];
-        };
 
         return (
             <div>
@@ -115,9 +115,7 @@ class Question extends Component {
                         </div>
                         <div id="time">
                             <div id="countdown">
-                                 <Countdown
-                                    date={Date.now() + 30000}
-                                    renderer={renderer}/>
+                                    <input disabled value={this.state.seconds}/>
                             </div>
                             <div id="seconds"> seconds</div>
                             <div id="value"> Question Value</div>
@@ -125,9 +123,14 @@ class Question extends Component {
                         </div>
                         <div id="score"></div>
                         <div></div>
-                        {/* <button onClick={() => this.props.nextQuestion()}>oh hai mark</button> */}
-                        <Link onClick={() => this.props.changeQuestion(1)} className="course-link" to={`/quiz/question/${incIndex}`}>hai babe</Link>
-                        <Link onClick={() => this.props.changeQuestion(-1)} className="course-link" to={`/quiz/question/${decIndex}`}>you're tearing me apart Lisa!</Link>
+                        <Link onClick={() => this.props.changeQuestion(1)} 
+                        className="course-link disabled question-btn next-question" to={`/quiz/question/${incIndex}`}>
+                            Next Question &rarr;
+                        </Link>
+                        <Link onClick={() => this.props.changeQuestion(-1)} 
+                        className="course-link disabled question-btn prev-question" to={`/quiz/question/${decIndex}`}>
+                            &larr; Previous Question
+                        </Link>
                      </div>
                 </div>
             </div>
