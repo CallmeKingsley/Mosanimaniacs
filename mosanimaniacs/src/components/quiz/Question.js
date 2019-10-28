@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef, useRef } from "react";
 import { connect } from "react-redux";
 import '../../css/Question.css';
 import {changeQuestion} from '../../redux/actions/index';
@@ -16,10 +16,6 @@ import Countdown from 'react-countdown-now';
 
 class Question extends Component {
 
-    componentDidMount() {
-        this.startTimer();
-    }
-
     constructor(props) {
         super(props);
         this.incrementOptionIndex = this.incrementOptionIndex.bind(this);
@@ -27,11 +23,26 @@ class Question extends Component {
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
+        this.checkAnswer = this.checkAnswer.bind(this);
+        this.answerChoice = [];
+        this.nextQuestion = React.createRef();
         this.state = {
             total: 500,
             seconds: 30
         }
     }
+
+    componentDidMount() {
+        console.log("mounted");
+        this.setState({
+            seconds: 30
+        });
+        this.answerChoice.forEach(el => {
+            el.classList.remove("correct", "incorrect");
+        });
+        this.startTimer();
+    }
+
 
     startTimer() {
         if (this.timer == 0 && this.state.seconds > 0) {
@@ -81,8 +92,20 @@ class Question extends Component {
     }
 
     pointDecrease(num){
-        console.log('hey');
         this.setState({total: this.state.total - num});
+    }
+
+    checkAnswer(e) {
+        let selectedAnswer = e.target.dataset.answer;
+        let correctAnswer = this.props.selectedQuestion.Answer;
+        if (selectedAnswer == correctAnswer) {
+            e.target.classList.add('correct');
+        } else {
+            e.target.classList.add('incorrect');
+        }
+        this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
+        clearInterval(this.timer);
+        this.nextQuestion.current.classList.remove("next-disabled");
     }
 
     render() {
@@ -106,7 +129,11 @@ class Question extends Component {
                         <div id="answers">
                             {
                                 selectedQuestion.Options.map((el,i) => (
-                                    <div className="answer">
+                                    // <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={answerChoice[i]}>
+                                    <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={(ref) => {
+                                            this.answerChoice[i] = ref;
+                                            return true;
+                                        }}>
                                         <div className="circle" key={i}>{this.incrementOptionIndex(i)}</div>
                                         <p className="quizText">{el}</p>
                                     </div>
@@ -123,12 +150,17 @@ class Question extends Component {
                         </div>
                         <div id="score"></div>
                         <div></div>
-                        <Link onClick={() => this.props.changeQuestion(1)} 
-                        className="course-link disabled question-btn next-question" to={`/quiz/question/${incIndex}`}>
+                        <Link onClick={() => {
+                            this.props.changeQuestion(1)
+                            
+                        }} 
+                        className="course-link next-disabled question-btn next-question" 
+                        to={`/quiz/question/${incIndex}`}
+                        ref={this.nextQuestion}>
                             Next Question &rarr;
                         </Link>
                         <Link onClick={() => this.props.changeQuestion(-1)} 
-                        className="course-link disabled question-btn prev-question" to={`/quiz/question/${decIndex}`}>
+                        className="course-link next-disabled question-btn prev-question" to={`/quiz/question/${decIndex}`}>
                             &larr; Previous Question
                         </Link>
                      </div>

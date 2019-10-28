@@ -57,6 +57,7 @@
 
 .quizText {
     font-family: 'Open Sans', sans-serif;
+    pointer-events: none;
 }
 
 .question-points-section{
@@ -83,10 +84,30 @@
     height: 100px;
     border-radius: 280px;
     margin-bottom: 40px;
+    transition: .3s;
 }
 
 .answer p {
     font-size: 1.5rem;
+}
+
+.answer:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 15px 0 #444;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.correct, .incorrect {
+    transform: scale(1.1);
+}
+
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background: red;
 }
 
 .circle{
@@ -100,6 +121,7 @@
     height: 80px;
     width: 80px;
     border-radius: 50%;
+    pointer-events: none;
 }
 
 .ques:nth-child(4){
@@ -192,9 +214,14 @@
     color: #CDE0C4;
 }
 
-.disabled {
-    background-color: rgba(64, 121, 140, 0.5);
+.choice-disabled, 
+.next-disabled {
     pointer-events: none;
+
+}
+
+.next-disabled {
+    background-color: rgba(64, 121, 140, 0.5);
 }
 
 .disabled:hover {
