@@ -5,6 +5,8 @@ const QuestionSchema = mongoose.Schema({
   Question: String,
   Options: [],
   Answer: String,
+  Attempted: Boolean,
+  Correct: Boolean
 });
 
 module.exports = mongoose.model('tempQuestionSchema', QuestionSchema);

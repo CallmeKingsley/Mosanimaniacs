@@ -50,7 +50,7 @@
 }
 
 .navyBlue h2,
-.answer p {
+#answers > div p {
     color: #CDE0C4;
     margin: 0 0 0 2rem;
 }
@@ -76,7 +76,8 @@
     margin-top: 45px;
 }
 
-.answer{
+/*.answer*/
+#answers > div {
     display: flex;
     align-items: center;
     background-color:#70A9A2;
@@ -87,11 +88,13 @@
     transition: .3s;
 }
 
-.answer p {
+/*.answer p*/
+#answers > div p {
     font-size: 1.5rem;
 }
 
-.answer:hover {
+/*.answer:hover*/
+#answers > div:hover {
     transform: scale(1.1);
     box-shadow: 0 10px 15px 0 #444;
     transition: .3s;
@@ -103,11 +106,11 @@
 }
 
 .correct {
-    background-color: green;
+    background-color: green !important;
 }
 
 .incorrect {
-    background: red;
+    background: red !important;
 }
 
 .circle{

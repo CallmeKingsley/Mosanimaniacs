@@ -19,4 +19,9 @@ export const getQuestions = url => async (dispatch) => {
 
 export const changeQuestion = num => dispatch => {
     dispatch({type: questions.CHANGEQUESTION, payload: num})
-}   
+}
+
+export const updatePlayerAttempts = (attempt, answer) => dispatch => {
+    console.log(attempt, answer);
+    dispatch({type: questions.UPDATEATTEMPT, payload: {attempt, answer}});
+}

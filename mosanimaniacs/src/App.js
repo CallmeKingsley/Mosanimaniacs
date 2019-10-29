@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link, BrowserHistory } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { connect } from 'react-redux';
 import history from './history/history';
 import Welcome from './components/quiz/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';

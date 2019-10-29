@@ -1,18 +1,8 @@
 import React, { Component, createRef, useRef } from "react";
 import { connect } from "react-redux";
 import '../../css/Question.css';
-import {changeQuestion} from '../../redux/actions/index';
+import {changeQuestion, updatePlayerAttempts} from '../../redux/actions/index';
 import {Link} from 'react-router-dom';
-
-import { WatchContent } from 'react-mutation-observer';
-import Countdown from 'react-countdown-now';
-
-    // function pointDecrease(){
-    //     total = total - newNum;
-    //     return total;
-    // }
-
-    // pointDecrease();
 
 class Question extends Component {
 
@@ -100,8 +90,10 @@ class Question extends Component {
         let correctAnswer = this.props.selectedQuestion.Answer;
         if (selectedAnswer == correctAnswer) {
             e.target.classList.add('correct');
+            this.props.updatePlayerAttempts(true, true);
         } else {
             e.target.classList.add('incorrect');
+            this.props.updatePlayerAttempts(true, false);
         }
         this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
         clearInterval(this.timer);
@@ -109,7 +101,7 @@ class Question extends Component {
     }
 
     render() {
-        const { question, index, selectedQuestion } = this.props;
+        const { question, index, selectedQuestion, attempted, correct } = this.props;
         const incIndex = index + 1;
         const decIndex = index - 1;
 
@@ -129,7 +121,6 @@ class Question extends Component {
                         <div id="answers">
                             {
                                 selectedQuestion.Options.map((el,i) => (
-                                    // <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={answerChoice[i]}>
                                     <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={(ref) => {
                                             this.answerChoice[i] = ref;
                                             return true;
@@ -152,15 +143,18 @@ class Question extends Component {
                         <div></div>
                         <Link onClick={() => {
                             this.props.changeQuestion(1)
-                            
+                            // this.
+                            this.props.history.push(`/quiz/question/${incIndex}`);
                         }} 
                         className="course-link next-disabled question-btn next-question" 
-                        to={`/quiz/question/${incIndex}`}
                         ref={this.nextQuestion}>
                             Next Question &rarr;
                         </Link>
-                        <Link onClick={() => this.props.changeQuestion(-1)} 
-                        className="course-link next-disabled question-btn prev-question" to={`/quiz/question/${decIndex}`}>
+                        <Link onClick={() => {
+                            this.props.changeQuestion(-1)
+                            this.props.history.push(`/quiz/question/${decIndex}`);
+                        }} 
+                        className="course-link next-disabled question-btn prev-question">
                             &larr; Previous Question
                         </Link>
                      </div>
@@ -174,13 +168,18 @@ function mapStateToProps(state) {
     const questions = state.questions.data;
     const index = state.selectedQuestionIndex;
     const selectedQuestion = questions[index];
+    const attempted = selectedQuestion.Attempted;
+    const correct = selectedQuestion.Correct;
     return {
         questions: questions,
         index: index,
-        selectedQuestion: selectedQuestion
+        selectedQuestion: selectedQuestion,
+        attempted: attempted,
+        correct: correct
     }
 }
 
 export default connect(mapStateToProps,{
-    changeQuestion
+    changeQuestion,
+    updatePlayerAttempts
 })(Question);

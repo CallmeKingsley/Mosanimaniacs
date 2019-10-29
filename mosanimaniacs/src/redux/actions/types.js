@@ -4,5 +4,6 @@ export const welcome = {
 
 export const questions = {
     GETQUESTIONS: 'GETQUESTIONS',
-    CHANGEQUESTION: 'CHANGEQUESTION'
+    CHANGEQUESTION: 'CHANGEQUESTION',
+    UPDATEATTEMPT: 'UPDATEATTEMPT'
 };
