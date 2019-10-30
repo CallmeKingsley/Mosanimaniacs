@@ -1,44 +1,42 @@
-import { combineReducers } from 'redux';
-import { questions } from '../actions/types';
+import { questions, score } from '../actions/types';
 
 const INITIAL_STATE = {
-    welcome: 'Hello World',
-    questions: '',
-    selectedQuestion: '',
-    selectedQuestionIndex: 0,
-    responses: []
+    questions: ''
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default function UpdateQuestion(state = INITIAL_STATE, action) {
     switch (action.type) {
         case questions.GETQUESTIONS:
             return {
                 ...state,
-                questions: action.payload
+                questions: action.payload.data
             }
-        case questions.CHANGEQUESTION:
-            return {
-                ...state,
-                selectedQuestionIndex: state.selectedQuestionIndex + action.payload
-            }
-        case questions.UPDATEATTEMPT:
-            const recordedAttempt = {...state.questions.data[state.selectedQuestionIndex]};
-            recordedAttempt.attempted = action.payload.attempt;
-            recordedAttempt.correct = action.payload.answer;
-            return {
-                ...state,
+        // case questions.UPDATEATTEMPT:
+        //     return state.questions.map((question, index) => {
+        //         if (index === action.payload.index) {
+        //             return {
+        //                 ...question,
+        //                 Attempted: action.payload.attempt,
+        //                 Correct: action.payload.answer
+        //             }
+        //         }
+        //         return question;
+        //     });
+            //{
+                // ...state,
                 // questions: {
-                //     ...state.questions.data.slice(0, state.selectedQuestionIndex),
-                //     recordedAttempt,
-                //     ...state.questions.data.slice(state.selectedQuestionIndex+1)
+                //     data: {
+                        
+                //     }
+                    //state.questions.data.slice(0, state.indexMinusOne),
+                    //state.questions.data.slice(state.selectedQuestionIndex)
                 // }
-                responses: {
-                    ...state.responses.slice(0, state.selectedQuestionIndex),
-                    ...recordedAttempt,
-                    ...state.responses.slice(state.selectedQuestionIndex+1)
-                }
-            }
+                // responses: {
+                //     ...state.responses.slice(0, state.selectedQuestionIndex),
+                //     ...recordedAttempt,
+                //     ...state.responses.slice(state.selectedQuestionIndex+1)
+                // }
         default:
-            return state;
+            return state;            
     }
 }

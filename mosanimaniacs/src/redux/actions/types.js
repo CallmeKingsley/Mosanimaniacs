@@ -5,5 +5,9 @@ export const welcome = {
 export const questions = {
     GETQUESTIONS: 'GETQUESTIONS',
     CHANGEQUESTION: 'CHANGEQUESTION',
-    UPDATEATTEMPT: 'UPDATEATTEMPT'
+    UPDATEATTEMPT: 'UPDATEATTEMPT',
 };
+
+export const score = {
+    UPDATESCORE: 'UPDATESCORE'
+}

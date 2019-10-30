@@ -9,10 +9,6 @@ import StartQuiz from './components/quiz/StartQuiz';
 import Question from './components/quiz/Question';
 import Conclusion from './components/quiz/Conclusion';
 import './App.css';
-import { bindActionCreators } from 'redux';
-import * as ActionCreators from './redux/actions/index'; 
-
-
 
 class App extends Component {
   render() {

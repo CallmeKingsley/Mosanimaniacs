@@ -7,12 +7,6 @@ class StartQuiz extends Component {
 
     constructor(props) {
         super(props);
-        this.handleStartQuiz = this.handleStartQuiz.bind(this);
-    }
-
-    handleStartQuiz() {
-        const { index } = this.props;
-        this.props.history.push(`/quiz/question/${index}`);
     }
 
     render() {
@@ -22,8 +16,7 @@ class StartQuiz extends Component {
         }
         return (
             <div id="start-quiz">
-                {/* <Link className="course-link" to={`/quiz/question/${index}`} >Start Quiz</Link> */}
-                <Link className="course-link" onClick={this.handleStartQuiz} >Start Quiz</Link>
+                <Link className="course-link" to={`/quiz/question/${index}`} >Start Quiz</Link>
             </div>
             
         )
@@ -31,8 +24,8 @@ class StartQuiz extends Component {
 }
 
 function mapStateToProps(state) {
-    const question = state.questions.data;
-    const index = state.selectedQuestionIndex;
+    const question = state.QuestionReducer.questions;
+    const index = state.ScoreReducer.selectedQuestionIndex;
     return {
         question: question,
         index: index

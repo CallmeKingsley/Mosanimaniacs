@@ -1,5 +1,5 @@
 import axios from "axios";
-import { questions } from './types';
+import { questions, score } from './types';
 
 const config = {
     withCredentials: true
@@ -17,11 +17,24 @@ export const getQuestions = url => async (dispatch) => {
     }
 }
 
+export const getResponses = url => async (dispatch) => {
+    try {
+        const response = await ax.get(url);
+        dispatch({type: questions.GETQUESTIONS, payload: response});
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const changeQuestion = num => dispatch => {
     dispatch({type: questions.CHANGEQUESTION, payload: num})
 }
 
-export const updatePlayerAttempts = (attempt, answer) => dispatch => {
-    console.log(attempt, answer);
-    dispatch({type: questions.UPDATEATTEMPT, payload: {attempt, answer}});
+export const updatePlayerAttempts = (attempt, answer, index) => dispatch => {
+    dispatch({type: questions.UPDATEATTEMPT, payload: {attempt, answer, index}});
+}
+
+export const updateScore = points => dispatch => {
+    dispatch({type: score.UPDATESCORE, payload: points});
 }
