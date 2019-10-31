@@ -15,6 +15,7 @@ class Question extends Component {
         this.countDown = this.countDown.bind(this);
         this.checkAnswer = this.checkAnswer.bind(this);
         this.resetQuestion = this.resetQuestion.bind(this);
+        this.renderNavBtn = this.renderNavBtn.bind(this);
         this.answerChoice = [];
         this.nextQuestion = React.createRef();
         this.state = {
@@ -29,7 +30,34 @@ class Question extends Component {
         this.resetQuestion(false);
     }
 
+    renderNavBtn(totalNum, currNum) {
+        const incIndex = currNum + 1;
+        if (totalNum === currNum) {
+            return (
+                <Link className="course-link question-btn"
+                to={'/quiz/results'} 
+                onClick={this.props.updatePlayerAttempts(this.state.attempted,this.state.correct,this.props.index)}>
+                    Finish Quiz
+                </Link>
+            )
+        } else {
+            return (
+                <Link className="course-link next-disabled question-btn next-question"
+                onClick={() => {
+                    this.props.changeQuestion(1);
+                    this.resetQuestion(true);
+                    this.renderNavBtn(this.props.questions.length, this.props.index);
+                }} 
+                ref={this.nextQuestion}
+                to={`/quiz/question/${incIndex}`}>
+                    Next Question &rarr;
+                </Link>
+            )
+        }
+    }
+
     resetQuestion(bool) {
+
         if (bool) {
             const {attempted, correct} = this.state;
             this.props.updatePlayerAttempts(attempted,correct,this.props.index);
@@ -39,6 +67,7 @@ class Question extends Component {
                 attempted: false,
                 correct: null
             });
+            // this.nextQuestion.classList.add("next-disabled");
         }
         this.answerChoice.forEach(el => {
             el.classList.remove("correct", "incorrect", "choice-disabled");
@@ -106,7 +135,8 @@ class Question extends Component {
 
     checkAnswer(e) {
         let selectedAnswer = e.target.dataset.answer;
-        let correctAnswer = this.props.selectedQuestion.Answer;
+        let {correctAnswer, index, questions} = this.props;
+        //let index = this.props.index;
         if (selectedAnswer == correctAnswer) {
             e.target.classList.add('correct');
             this.props.updateScore(this.state.total);
@@ -125,14 +155,14 @@ class Question extends Component {
         }
         this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
         clearInterval(this.timer);
-        this.nextQuestion.current.classList.remove("next-disabled");
+        if (index !== questions.length - 1) {
+            this.nextQuestion.current.classList.remove("next-disabled");
+        }
     }
 
     render() {
         const { questions, index, selectedQuestion, points } = this.props;
         const incIndex = index + 1;
-        const decIndex = index - 1;
-
         return (
             <div>
                 <div className="lightGreen">
@@ -180,24 +210,9 @@ class Question extends Component {
                                 <div class="scoreboard"><p>You</p><p>{points}</p></div>
                             </div>
                         </div>
-                        <div></div>
-                        { questions.length === index - 1
-                         ? <Link className="course-link question-btn"
-                            to={'/quiz/results'} 
-                            onClick={this.props.updatePlayerAttempts(this.state.attempted,this.statecorrect,this.props.index)}>
-                                Finish Quiz
-                            </Link>
-                         : <Link onClick={() => {
-                                this.props.changeQuestion(1);
-                                this.resetQuestion(true);
-                            }} 
-                            className="course-link next-disabled question-btn next-question" 
-                            ref={this.nextQuestion}
-                            to={`/quiz/question/${incIndex}`}>
-                                Next Question &rarr;
-                        </Link>
-                        }
-                        
+                        <div>
+                            {this.renderNavBtn(questions.length - 1, index)}
+                        </div>
                         {/* <Link onClick={() => {
                             this.props.changeQuestion(-1)
                             this.props.history.push(`/quiz/question/${decIndex}`);
