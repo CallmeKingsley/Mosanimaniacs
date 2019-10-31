@@ -142,18 +142,79 @@
 }
 
 #score{
-    background-image:url("../images/scoreBoard.png");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    /* background-image:url("../images/scoreBoard.png"); */
+    /* background-repeat: no-repeat;
+    background-size: 100%; */
+    background: #222;
     width: 378px;
-    margin-top: 45px;
+    height: 475px;
+    margin-top: 35px;
 }
 
+#score h3,
+#score h4,
+#score div h3:last-child {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#score h3,
+#score h4 {
+    width: 100%;
+    text-align: center;
+    background-color: #70A9A2;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.points {
+    text-align: center;
+    color: grey;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.points span {
+    font-size: 2rem;
+    color: #70A9A2;
+}
+
+#score > div {
+    padding: 20px;
+}
+
+.scoreboard {
+    border-bottom: 1px solid white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.scoreboard p {
+    color: #ccc;
+    margin: 0.5rem 0;
+}
+
+.scoreboard:last-child p {
+    color: white;
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+
+.scoreboard span:first-child {
+    text-align: left;
+}
+
+.scoreboard span:nth-child(2) {
+    text-align: right;
+}
 
 #countdown{
     font-size: 146.4px;
     text-align: center;
-    margin-top: 45px;
+    margin-top: 75px;
     color: white;
 }
 

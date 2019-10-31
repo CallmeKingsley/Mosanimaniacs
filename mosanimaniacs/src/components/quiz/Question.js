@@ -15,8 +15,6 @@ class Question extends Component {
         this.countDown = this.countDown.bind(this);
         this.checkAnswer = this.checkAnswer.bind(this);
         this.resetQuestion = this.resetQuestion.bind(this);
-        this.sendAttemptToStore = this.sendAttemptToStore.bind(this);
-        // this.keepPrevQuestionHistory = this.keepPrevQuestionHistory.bind(this);
         this.answerChoice = [];
         this.nextQuestion = React.createRef();
         this.state = {
@@ -29,10 +27,6 @@ class Question extends Component {
 
     componentDidMount() {
         this.resetQuestion(false);
-    }
-
-    sendAttemptToStore() {
-
     }
 
     resetQuestion(bool) {
@@ -135,7 +129,7 @@ class Question extends Component {
     }
 
     render() {
-        const { question, index, selectedQuestion, attempted, correct, points } = this.props;
+        const { questions, index, selectedQuestion, points } = this.props;
         const incIndex = index + 1;
         const decIndex = index - 1;
 
@@ -173,19 +167,37 @@ class Question extends Component {
                             <div id="value"> Question Value</div>
                             <div id="addPoints">{this.state.total}</div>
                         </div>
-                        <div id="score">{points}</div>
+                        <div id="score">
+                            <h3>YOUR SCORE</h3>
+                            <p class="points"><span>{points}</span> PTS</p>
+                            <h4>LEADER BOARD</h4>
+                            <div>
+                                <div class="scoreboard"><p>The Joker</p><p>2,212</p></div>
+                                <div class="scoreboard"><p>Thanos</p><p>2,122</p></div>
+                                <div class="scoreboard"><p>Antonio Brown</p><p>2,123</p></div>
+                                <div class="scoreboard"><p>Florida Man</p><p>1,612</p></div>
+                                <div class="scoreboard"><p>Kanye West</p><p>1,212</p></div>
+                                <div class="scoreboard"><p>You</p><p>{points}</p></div>
+                            </div>
+                        </div>
                         <div></div>
-                        <Link onClick={() => {
-                            //this.resetQuestion(true);
-                            this.props.changeQuestion(1);
-                            this.resetQuestion(true);
-                            //this.props.history.push(`/quiz/question/${incIndex}`);
-                        }} 
-                        className="course-link next-disabled question-btn next-question" 
-                        ref={this.nextQuestion}
-                        to={`/quiz/question/${incIndex}`}>
-                            Next Question &rarr;
+                        { questions.length === index - 1
+                         ? <Link className="course-link question-btn"
+                            to={'/quiz/results'} 
+                            onClick={this.props.updatePlayerAttempts(this.state.attempted,this.statecorrect,this.props.index)}>
+                                Finish Quiz
+                            </Link>
+                         : <Link onClick={() => {
+                                this.props.changeQuestion(1);
+                                this.resetQuestion(true);
+                            }} 
+                            className="course-link next-disabled question-btn next-question" 
+                            ref={this.nextQuestion}
+                            to={`/quiz/question/${incIndex}`}>
+                                Next Question &rarr;
                         </Link>
+                        }
+                        
                         {/* <Link onClick={() => {
                             this.props.changeQuestion(-1)
                             this.props.history.push(`/quiz/question/${decIndex}`);
