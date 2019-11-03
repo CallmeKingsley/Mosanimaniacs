@@ -134,7 +134,7 @@
 #time{
     margin-right: 30px;
     margin-left: -65px;
-    margin-top: 35px;
+    margin-top: -20px;
     background-image:url("../images/timerCircle.png");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -290,4 +290,17 @@
 
 .disabled:hover {
     transform: none;
+}
+
+#message {
+    border: 5px solid #40798C;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    bottom: 50px;
+    right: 470px;
 }

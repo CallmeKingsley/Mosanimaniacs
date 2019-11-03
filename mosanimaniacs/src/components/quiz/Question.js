@@ -16,13 +16,15 @@ class Question extends Component {
         this.checkAnswer = this.checkAnswer.bind(this);
         this.resetQuestion = this.resetQuestion.bind(this);
         this.renderNavBtn = this.renderNavBtn.bind(this);
+        this.revealAnswer = this.revealAnswer.bind(this);
         this.answerChoice = [];
         this.nextQuestion = React.createRef();
         this.state = {
             total: 500,
             seconds: 30,
             attempted: false,
-            correct: null
+            correct: null,
+            message: ""
         }
     }
 
@@ -65,9 +67,10 @@ class Question extends Component {
                 total: 500,
                 seconds: 30,
                 attempted: false,
-                correct: null
+                correct: null,
+                message: ""
             });
-            // this.nextQuestion.classList.add("next-disabled");
+            this.nextQuestion.current.classList.add("next-disabled");
         }
         this.answerChoice.forEach(el => {
             el.classList.remove("correct", "incorrect", "choice-disabled");
@@ -76,13 +79,7 @@ class Question extends Component {
         this.startTimer();
     }
 
-    // keepPrevQuestionHistory() {
-        
-    // }
-
-
     startTimer() {
-        console.log(this.timer, this.state.seconds);
         if (this.timer == 0 && this.state.seconds > 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
@@ -106,7 +103,8 @@ class Question extends Component {
             case 2:
                 this.pointDecrease(50);
                 break;
-            case 0: 
+            case 0:
+                this.revealAnswer(true);
                 clearInterval(this.timer);
                 break;
         }
@@ -133,25 +131,45 @@ class Question extends Component {
         this.setState({total: this.state.total - num});
     }
 
+    revealAnswer(bool) {
+        let {index, questions} = this.props;
+        let correctAnswer = questions[index].Answer;
+        this.answerChoice.forEach(el => {
+            el.classList.add('choice-disabled');
+            let text = el.textContent;
+            text = text.substring(1);
+            if (text === correctAnswer) {
+                el.classList.add("correct");
+            }
+        });
+        if (bool) {
+            this.nextQuestion.current.classList.remove("next-disabled");
+            this.setState({
+                message: "Time's up! Here is the correct answer. Select the next question button to continue."
+            })    
+        }
+    }
+
     checkAnswer(e) {
         let selectedAnswer = e.target.dataset.answer;
-        let {correctAnswer, index, questions} = this.props;
-        //let index = this.props.index;
+        let {index, questions} = this.props;
+        let correctAnswer = questions[index].Answer;
         if (selectedAnswer == correctAnswer) {
             e.target.classList.add('correct');
             this.props.updateScore(this.state.total);
             this.setState({
                 attempted: true,
-                correct: true
+                correct: true,
+                message: "Great job! Select the next question button to continue."
             });
-            // this.props.updatePlayerAttempts(true,false,this.props.index);
         } else {
             e.target.classList.add('incorrect');
-            // this.props.updatePlayerAttempts(true,false,this.props.index);
             this.setState({
                 attempted: true,
-                correct: false
+                correct: false,
+                message: "That's not it. Here's the correct answer. Select the next question button to continue."
             });
+            this.revealAnswer(false);
         }
         this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
         clearInterval(this.timer);
@@ -197,29 +215,25 @@ class Question extends Component {
                             <div id="value"> Question Value</div>
                             <div id="addPoints">{this.state.total}</div>
                         </div>
+                        <div id="message">
+                            {this.state.message}
+                        </div>
                         <div id="score">
                             <h3>YOUR SCORE</h3>
-                            <p class="points"><span>{points}</span> PTS</p>
+                            <p className="points"><span>{points}</span> PTS</p>
                             <h4>LEADER BOARD</h4>
                             <div>
-                                <div class="scoreboard"><p>The Joker</p><p>2,212</p></div>
-                                <div class="scoreboard"><p>Thanos</p><p>2,122</p></div>
-                                <div class="scoreboard"><p>Antonio Brown</p><p>2,123</p></div>
-                                <div class="scoreboard"><p>Florida Man</p><p>1,612</p></div>
-                                <div class="scoreboard"><p>Kanye West</p><p>1,212</p></div>
-                                <div class="scoreboard"><p>You</p><p>{points}</p></div>
+                                <div className="scoreboard"><p>The Joker</p><p>2,212</p></div>
+                                <div className="scoreboard"><p>Thanos</p><p>2,122</p></div>
+                                <div className="scoreboard"><p>Antonio Brown</p><p>2,123</p></div>
+                                <div className="scoreboard"><p>Florida Man</p><p>1,612</p></div>
+                                <div className="scoreboard"><p>Kanye West</p><p>1,212</p></div>
+                                <div className="scoreboard"><p>You</p><p>{points}</p></div>
                             </div>
                         </div>
                         <div>
                             {this.renderNavBtn(questions.length - 1, index)}
                         </div>
-                        {/* <Link onClick={() => {
-                            this.props.changeQuestion(-1)
-                            this.props.history.push(`/quiz/question/${decIndex}`);
-                        }} 
-                        className="course-link next-disabled question-btn prev-question">
-                            &larr; Previous Question
-                        </Link> */}
                      </div>
                 </div>
             </div>
@@ -231,15 +245,11 @@ function mapStateToProps(state) {
     const questions = state.QuestionReducer.questions;
     const index = state.ScoreReducer.selectedQuestionIndex;
     const selectedQuestion = questions[index];
-    // const attempted = questions[index].Attempted;
-    // const correct = questions[index].Correct;
     const points = state.ScoreReducer.points;
     return {
         questions: questions,
         index: index,
         selectedQuestion: selectedQuestion,
-        // attempted: attempted,
-        // correct: correct,
         points: points
     }
 }
