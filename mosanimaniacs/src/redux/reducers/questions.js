@@ -22,7 +22,8 @@ export default function NewQestion(state = INITIAL_STATE, action) {
                         return {
                             ...question,
                             Attempted: action.payload.attempt,
-                            Correct: action.payload.answer
+                            Correct: action.payload.answer,
+                            Points: action.payload.points
                         }
                     }
                     return question;

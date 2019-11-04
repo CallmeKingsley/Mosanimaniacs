@@ -11,3 +11,7 @@ export const questions = {
 export const score = {
     UPDATESCORE: 'UPDATESCORE'
 }
+
+export const responses = {
+    POSTRESPONSES: 'POSTRESPONSES'
+}

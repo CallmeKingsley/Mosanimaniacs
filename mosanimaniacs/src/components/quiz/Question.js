@@ -1,7 +1,7 @@
 import React, { Component, createRef, useRef } from "react";
 import { connect } from "react-redux";
 import '../../css/Question.css';
-import {changeQuestion, updatePlayerAttempts, updateScore} from '../../redux/actions/index';
+import {changeQuestion, updatePlayerAttempts, updateScore, postResponses} from '../../redux/actions/index';
 import {Link} from 'react-router-dom';
 
 class Question extends Component {
@@ -34,11 +34,15 @@ class Question extends Component {
 
     renderNavBtn(totalNum, currNum) {
         const incIndex = currNum + 1;
+        const points = this.state.correct ? this.state.total : 0;
         if (totalNum === currNum) {
             return (
                 <Link className="course-link question-btn"
                 to={'/quiz/results'} 
-                onClick={this.props.updatePlayerAttempts(this.state.attempted,this.state.correct,this.props.index)}>
+                onClick={() => {
+                        this.props.updatePlayerAttempts(this.state.attempted,this.state.correct,this.props.index,points);
+                        this.props.postResponses('/api/responses',this.props.responses);
+                    }}>
                     Finish Quiz
                 </Link>
             )
@@ -61,8 +65,9 @@ class Question extends Component {
     resetQuestion(bool) {
 
         if (bool) {
-            const {attempted, correct} = this.state;
-            this.props.updatePlayerAttempts(attempted,correct,this.props.index);
+            const {attempted, correct, total} = this.state;
+            const points = correct ? total : 0;
+            this.props.updatePlayerAttempts(attempted,correct,this.props.index,points);
             this.setState({
                 total: 500,
                 seconds: 30,
@@ -145,6 +150,8 @@ class Question extends Component {
         if (bool) {
             this.nextQuestion.current.classList.remove("next-disabled");
             this.setState({
+                attempted: true,
+                correct: false,
                 message: "Time's up! Here is the correct answer. Select the next question button to continue."
             })    
         }
@@ -246,16 +253,19 @@ function mapStateToProps(state) {
     const index = state.ScoreReducer.selectedQuestionIndex;
     const selectedQuestion = questions[index];
     const points = state.ScoreReducer.points;
+    const responses = state.ScoreReducer.responses;
     return {
-        questions: questions,
-        index: index,
-        selectedQuestion: selectedQuestion,
-        points: points
+        questions,
+        index,
+        selectedQuestion,
+        points,
+        responses
     }
 }
 
 export default connect(mapStateToProps,{
     changeQuestion,
     updatePlayerAttempts,
-    updateScore
+    updateScore,
+    postResponses
 })(Question);
