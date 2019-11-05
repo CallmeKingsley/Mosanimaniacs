@@ -1,17 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './redux/reducers/index';
+import { combineReducers } from 'redux';
+import reduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+import QuestionReducer from './redux/reducers/index';
+import ScoreReducer from './redux/reducers/questions';
 import * as serviceWorker from './serviceWorker';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const middleware = applyMiddleware(reduxThunk);
+
+const quizGame = combineReducers({
+    QuestionReducer,
+    ScoreReducer
+});
+
+const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-    rootReducer,
-    window.devToolsExtension && window.devToolsExtension()
+    quizGame,
+    reduxDevTools (
+        middleware
+    )
 )
 
 render(
