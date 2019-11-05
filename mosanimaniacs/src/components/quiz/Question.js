@@ -41,7 +41,7 @@ class Question extends Component {
                 to={'/quiz/results'} 
                 onClick={() => {
                         this.props.updatePlayerAttempts(this.state.attempted,this.state.correct,this.props.index,points);
-                        this.props.postResponses('/api/responses',this.props.responses);
+                        // this.props.postResponses('/api/responses',this.props.responses);
                     }}>
                     Finish Quiz
                 </Link>

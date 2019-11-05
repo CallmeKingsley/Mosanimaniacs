@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import '../../css/Results.css';
+import { postResponses } from '../../redux/actions/index';
 import { connect } from "react-redux";
 
 class QuizResults extends Component {
+
+    componentWillMount() {
+        this.props.postResponses('/api/responses',this.props.responses);
+    }
+
     render() {
         const { questions, points } = this.props;
         return (
@@ -43,10 +49,14 @@ class QuizResults extends Component {
 function mapStateToProps(state) {
     const questions = state.ScoreReducer.responses;
     const points = state.ScoreReducer.points;
+    const responses = state.ScoreReducer.responses;
     return {
         questions,
-        points
+        points,
+        responses
     }
 }
 
-export default connect(mapStateToProps)(QuizResults);
+export default connect(mapStateToProps, {
+    postResponses
+})(QuizResults);

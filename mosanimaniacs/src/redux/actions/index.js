@@ -28,7 +28,6 @@ export const getResponses = url => async (dispatch) => {
 }
 
 export const postResponses = (url,response) => dispatch => {
-    console.log(url, response);
     // try {
     //     const studentResponses = await ax.post(url,{response});
     //     dispatch({type: responses.POSTRESPONSES, payload: studentResponses});
