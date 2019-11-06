@@ -15,3 +15,9 @@ export const score = {
 export const responses = {
     POSTRESPONSES: 'POSTRESPONSES'
 }
+
+export const login = {
+    TEACHERLOGIN: 'TEACHERLOGIN',
+    STUDENTLOGIN: 'STUDENTLOGIN',
+    LOGINERROR: 'LOGINERROR'
+}

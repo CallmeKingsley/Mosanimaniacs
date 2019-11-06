@@ -1,0 +1,408 @@
+[
+  {
+      "Options": [
+          "Are easily magnetized",
+          "Create the magnetic force between two poles",
+          "Create opposition to the passage of flux lines",
+          "Focus lines of flux"
+      ],
+      "_id": "5d9a6c01475e0d068a945550",
+      "Question": "Ferromagnetic materials are materials that _____.",
+      "Answer": "Are easily magnetized",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Flux lines; poles",
+          "Electrostatic fields, quantum fields",
+          "Magnetic fields; quantum",
+          "Electrostatic fields; magnetic fields"
+      ],
+      "_id": "5d9a6c01475e0d068a945551",
+      "Question": "Electromagnetic fields are formed by combining _____ and _____.",
+      "Answer": "Electrostatic fields; magnetic fields",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "The magnetic force between two poles.",
+          "The non-rotating electrical parts of generator or motor",
+          "A device that converts mechanical energy into electrical energy",
+          "Any material that is easily magnetized, like nickel, cobalt, and iron"
+      ],
+      "_id": "5d9a6c01475e0d068a945552",
+      "Question": "What is a stator?",
+      "Answer": "A device that converts mechanical energy into electrical energy",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Number of loops; watts",
+          "Resistance; voltage",
+          "Number of loops; voltage",
+          "Resistance; watts"
+      ],
+      "_id": "5d9a6c01475e0d068a945553",
+      "Question": "Increasing the _____ in the wire that cuts a magnetic field will also increase the magnitude of _____ produced by electromagnetic induction.",
+      "Answer": "Number of loops; voltage",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Increasing the number of loops in a coil",
+          "Wrapping the windings of a conductor closer together",
+          "Answers A and B",
+          "None of the above"
+      ],
+      "_id": "5d9a6c01475e0d068a945554",
+      "Question": "What would create a stronger magnetic field?",
+      "Answer": "C. Answers A and B",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Decrease",
+          "Increase",
+          "Do nothing to",
+          "Minimize"
+      ],
+      "_id": "5d9a6c01475e0d068a945558",
+      "Question": "Increasing the current flowing through a conductor will _____ the strength f the electromagnetic field in that conductor.",
+      "Answer": "Increase",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Power",
+          "Current",
+          "Wattage",
+          "Voltage"
+      ],
+      "_id": "5d9a6c01475e0d068a945559",
+      "Question": "What can be increased in a DC generator by increasing the speed of the wire?",
+      "Answer": "Voltage",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "voltage drop of American conductors to and from the load",
+          "length of American conductors",
+          "cross-sectional area of American conductors",
+          "resistance of wire"
+      ],
+      "_id": "5db10459d5d1f127c9e0fbfb",
+      "Question": "Circular mils are the units used to measure the ____.",
+      "Answer": "cross-sectional area of American conductors",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Current flow",
+          "Load value",
+          "Area of wires or conductors",
+          "Resistance of a wire or conductor"
+      ],
+      "_id": "5db10459d5d1f127c9e0fbfc",
+      "Question": "What does the formula R=(K×L)/A calculate?",
+      "Answer": "Resistance of a wire or conductor",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "power",
+          "current",
+          "resistance",
+          "voltage"
+      ],
+      "_id": "5db10459d5d1f127c9e0fbfe",
+      "Question": "Lamps with the same value of resistance can have different wattage ratings if the _______ ratings are different.",
+      "Answer": "voltage",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "always provides more than one possible path for the current to flow from the source and back",
+          "allows the current to take a shorter path back to the source, avoiding the opposition of the load",
+          "allows the current to flow to the intended destination through the load and back to the source",
+          "is a circuit that has no current flowing through it"
+      ],
+      "_id": "5db10459d5d1f127c9e0fbff",
+      "Question": "An open circuit _______.",
+      "Answer": "is a circuit that has no current flowing through it",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Magnetic field flux; current flow; thrust",
+          "Current flow; thrust; magnetic field flux",
+          "Thrust; magnetic field flux; current flow",
+          "Thrust; current flow; magnetic field flux"
+      ],
+      "_id": "5d9a6c01475e0d068a945556",
+      "Question": "When applying the Left-Hand Rule for Conductors, the thumb points in the direction of _____, the first and/or index fingers points in the direction of _____, and the center finger points in the direction of _____.",
+      "Answer": "Thrust; magnetic field flux; current flow",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Inducing a wattage into a conductor by passing it through an electrostatic field",
+          "Inducing a voltage into a conductor by passing it through a magnetic field",
+          "Inducing an amp into a conductor by passing it through a magnetic field",
+          "Inducing a shock into a conductor by passing it through magnetic field"
+      ],
+      "_id": "5d9a6c01475e0d068a945557",
+      "Question": "What is electromagnetic induction?",
+      "Answer": "Inducing a voltage into a conductor by passing it through a magnetic field",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Conductor; magnetic field",
+          "Magnetic field; flux lines",
+          "Conductor; commutator",
+          "Magnetic field; power source"
+      ],
+      "_id": "5d9a6c01475e0d068a945561",
+      "Question": "Relative motion between the _____ and _____ is needed to have a voltage induced.",
+      "Answer": "Conductor; magnetic field",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Electrical generator",
+          "Solar panel",
+          "Hydraulic generator",
+          "Conductor"
+      ],
+      "_id": "5d9a6c01475e0d068a945562",
+      "Question": "What device converts mechanical energy into electrical energy?",
+      "Answer": "Electrical generator",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Electrostatic and magnetic fields combine",
+          "Like poles repel each other and unlike poles attract each other",
+          "There is opposition to the passage of flux lines",
+          "Current flows through a conductor"
+      ],
+      "_id": "5d9a6c01475e0d068a945565",
+      "Question": "A magnetic field of concentric circles expanding perpendicular and outward from the conductor occurs when _____.",
+      "Answer": "Current flows through a conductor",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Direction of flux lines",
+          "Strength of the electromagnetic field",
+          "Amount of resistance in the conductors",
+          "Speed of the current flow"
+      ],
+      "_id": "5d9a6c01475e0d068a945566",
+      "Question": "If the direction of the current flow in a conductor is known, what can be determined by using the left-hand rule for conductors?",
+      "Answer": "Direction of flux lines",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Slip rings",
+          "Stators",
+          "Coils",
+          "Wires"
+      ],
+      "_id": "5d9a6c01475e0d068a945570",
+      "Question": "In DC Generators, a commutator is used instead of _____.",
+      "Answer": "Slip rings",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Thumb",
+          "Middle/center finger",
+          "Index finger",
+          "Pinky finger"
+      ],
+      "_id": "5d9a6c01475e0d068a945571",
+      "Question": "Using the Left-Hand Rule for generators, the _____ indicates the direction of the current induced into the armature.",
+      "Answer": "Middle/center finger",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "The amount of resistance in conductors",
+          "The motion, direction of magnetic field, and direction of current flow for three-pole switches",
+          "The power, wattage, and voltage produced by a circuit",
+          "The motion, direction of magnetic field, and the direction of the current flow for electromagnetic function"
+      ],
+      "_id": "5db1053f628e9d2a0966d533",
+      "Question": "In DC Theory, what does the Left-Hand Rule for generators show?",
+      "Answer": "The motion, direction of magnetic field, and the direction of the current flow for electromagnetic function",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Positive charges",
+          "Attraction or repulsion",
+          "Negative charges",
+          "Increased pole strength"
+      ],
+      "_id": "5db1053f628e9d2a0966d536",
+      "Question": "The magnetic lines of force flowing into and out of magnets causes magnets held to close to each other to have _____.",
+      "Answer": "Attraction or repulsion",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Magnetic field of the circuit; magnetic force between the poles",
+          "Magnetic field of the magnet; flux lines of the magnet",
+          "Magnetic field of the electrons; magnetic line of force",
+          "Magnetic field of the magnet; magnetic field of the electrons"
+      ],
+      "_id": "5db1053f628e9d2a0966d539",
+      "Question": "A voltage would be induced if there was a motion of electrons in a conductor caused by an interaction between the _____ and ______.",
+      "Answer": "Magnetic field of the magnet; magnetic field of the electrons",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "The direction of the conductor passing through the flux lines",
+          "The amount of resistance in the circuit",
+          "The amount of voltage at the source",
+          "The magnetic field of the electrons"
+      ],
+      "_id": "5db1053f628e9d2a0966d53d",
+      "Question": "If the direction of the current flow changes, what else will change?",
+      "Answer": "The direction of the conductor passing through the flux lines",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Motion of electrons in a conductor caused by the interaction between the magnetic fields of the magnet and electrons",
+          "Opposition to the passage of flux lines",
+          "Attraction or repulsion that occurs when magnets are held close to each other",
+          "Magnetic force between two poles"
+      ],
+      "_id": "5db1053f628e9d2a0966d53a",
+      "Question": "Reluctance is the _____.",
+      "Answer": "Opposition to the passage of flux lines",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "always provides more than one possible path for the current to flow from the source and back",
+          "allows the current to take a shorter path back to the source, avoiding the opposition of the load",
+          "allows the current to flow to the intended destination through the load and back to the source",
+          "is a circuit that has no current flowing through it"
+      ],
+      "_id": "5db1053f628e9d2a0966d547",
+      "Question": "A short circuit _______.",
+      "Answer": "allows the current to take a shorter path back to the source, avoiding the opposition of the load",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Unlike; like",
+          "Like; unlike",
+          "North; south",
+          "South; north"
+      ],
+      "_id": "5d9a6c01475e0d068a945568",
+      "Question": "The _____ poles of magnets attract while _____ poles repel.",
+      "Answer": "Unlike; like",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "Opposition to the passage of flux lines",
+          "Magnetic force between two poles",
+          "Ability of material to focus lines of flux",
+          "Attraction or repulsion that occurs when magnets are held close to each other"
+      ],
+      "_id": "5db1053f628e9d2a0966d53f",
+      "Question": "Permeability is the _____.",
+      "Answer": "Ability of material to focus lines of flux",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "North; north",
+          "South; north",
+          "North; south",
+          "South; south"
+      ],
+      "_id": "5d9a6c01475e0d068a949870",
+      "Question": "The flux lines of a magnet leave the _____ end and enter the _____ end",
+      "Answer": "North; south",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  },
+  {
+      "Options": [
+          "lower; higher",
+          "higher; lower",
+          "higher; higher",
+          "lower; lower"
+      ],
+      "_id": "5db104c0628e9d2a0966d51e",
+      "Question": "The ____ a lamp’s resistance, the ____ a lamp’s wattage.",
+      "Answer": "higher; lower",
+      "__v": 0,
+      "Attempted": false,
+      "Correct": null
+  }
+]
