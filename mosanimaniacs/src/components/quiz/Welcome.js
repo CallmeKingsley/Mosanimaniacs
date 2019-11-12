@@ -15,6 +15,7 @@ class Welcome extends Component {
                 <div className="row">
                     <div className="col-sm text-center startBtn">
                         <Link to ="/quiz"><button type="button" className="btn btn-primary">START GAME</button></Link>
+                        <Link to ="/admin/create"><button type="button" className="btn btn-primary">CREATE QUIZ</button></Link>
                     </div>
                 </div>
             </div>
