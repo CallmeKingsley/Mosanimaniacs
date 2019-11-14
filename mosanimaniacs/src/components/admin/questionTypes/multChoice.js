@@ -3,11 +3,13 @@ import '../../../css/createQuiz.css';
 
 class MultipleChoice extends Component {
 
+    
+
     render() {
         const { index } = this.props;
         return (
-            <>
-                <input type="text" name={`questionTitle-${index}`} class={`questionTitle-${index}`} placeholder="Question"/>
+            <div>
+                <input type="text" name={`questionTitle-${index}`} className={`questionTitle-${index}`} placeholder="Question"/>
                 <table>
                     <tbody>
                         <tr>
@@ -35,7 +37,7 @@ class MultipleChoice extends Component {
                 <button className="save">Save</button>
                 <button className="delete">Delete</button>
                 <br/>
-            </>
+            </div>
         )
     }
 }

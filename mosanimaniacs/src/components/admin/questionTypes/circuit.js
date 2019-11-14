@@ -4,7 +4,7 @@ import '../../../css/Welcome.css';
 class Circuit extends Component {
     render() {
         return (
-            <>
+            <div>
                 <label htmlFor="circuitType">Select Circuit Type:</label>
                 <select id="circuitType">
                     <option value="fill-in-blank">Series</option>
@@ -14,7 +14,7 @@ class Circuit extends Component {
                 <button className="save">Save</button>
                 <button className="delete">Delete</button>
                 <br/>
-            </>
+            </div>
         )
     }
 }
