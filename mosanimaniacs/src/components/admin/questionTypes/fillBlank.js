@@ -7,10 +7,8 @@ class FillBlank extends Component {
         super(props);
 
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
-        this.stringifyFormData = this.stringifyFormData.bind(this);
         this.question = React.createRef();
         this.answer = React.createRef();
-        this.data = {};
     }
 
     handleSubmitQuestion(e) {
@@ -22,31 +20,19 @@ class FillBlank extends Component {
             answer: this.answer.current.value
         };
         // let res = this.stringifyFormData(otherStuff);
-        console.log(JSON.stringify(otherStuff));
         this.props.updateQuiz(otherStuff);
     }
 
-    stringifyFormData(fd) {
-        const questionData = {};
-        for (let key of fd.keys()) {
-            questionData[key] = fd.get(key);
-        }
-        this.data.push(JSON.stringify(questionData, null, 2));
-        console.log(this.data);  
-      }
-
-
     render() {
-        const { index } = this.props;
         return (
             <form onSubmit={this.handleSubmitQuestion}>
                 <fieldset>
                     <div>
-                        <input type="text" name={`questionTitle-${index}`} ref={this.question} 
-                        className={`questionTitle-${index}`} placeholder="Question"/>
+                        <input type="text" name="questionTitle" ref={this.question} 
+                        className="questionTitle" placeholder="Question"/>
 
-                        <input type="text" name={`correctAnswer-${index}`} ref={this.answer}
-                        className={`correctAnswer-${index}`} placeholder="Correct Answer"/>
+                        <input type="text" name="correctAnswer" ref={this.answer}
+                        className="correctAnswer" placeholder="Correct Answer"/>
 
                         <button type="submit" className="save">Save</button>
                         <button className="delete">Delete</button>

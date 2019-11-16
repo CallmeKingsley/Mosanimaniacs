@@ -10,6 +10,7 @@ import QuestionReducer from './redux/reducers/index';
 import ScoreReducer from './redux/reducers/questions';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 const middleware = applyMiddleware(reduxThunk);
 

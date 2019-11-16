@@ -12,16 +12,23 @@ class CreateQuiz extends Component {
 
         this.questionType = React.createRef();
         this.renderedForm = React.createRef();
+        this.renderQuestions = React.createRef();
         this.renderQuestionType = this.renderQuestionType.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitTitle = this.handleSubmitTitle.bind(this);
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
         this.updateQuiz = this.updateQuiz.bind(this);
+        this.handleEditTitle = this.handleEditTitle.bind(this);
         this.data = [];
 
         this.state = {
             title: "",
-            questionTypes: [],
+            questionType: "",
+            /*questionSelectDisabled is the boolean that 
+            will disable and re-enable the question type
+            select menu*/
+            questionSelectDisabled: false,
+            titledisabled: false,
             questions: [
                 // {
                 //     type: "multiple-choice"
@@ -69,7 +76,17 @@ class CreateQuiz extends Component {
     handleSubmitTitle (e) {
         e.preventDefault();
         const title = e.target.quizTitle.value;
-        this.setState({title: title});
+        this.setState({
+            title: title,
+            titledisabled: true
+        });
+    }
+
+    handleEditTitle(e) {
+        e.preventDefault();
+        this.setState({
+            titledisabled: false
+        });
     }
 
     handleSubmitQuestion (e) {
@@ -80,6 +97,8 @@ class CreateQuiz extends Component {
         console.log(data);
         this.setState(prevState => {
             return {
+                questionType: "",
+                questionSelectDisabled: false,
                 questions: [
                     ...prevState.questions,
                     data
@@ -91,51 +110,60 @@ class CreateQuiz extends Component {
     renderQuestionType (e) {
         //gets the value from the form and then updates state
         let component = e.target.value;
-        this.setState(prevState => {
-            switch(component) {
-                case "multiple-choice":
-                    console.log("update state stuff for multi choice question");
-            }
-            return {
-                questionTypes: [
-                    ...prevState.questionTypes,
-                    component
-                ]
-            }
+        this.setState({
+            questionSelectDisabled: true,
+            questionType: component
         });
-
         //sets the value of the select menu to question-type
         e.target.value = "question-type";
     }
 
     render() {
-        const { questions, questionTypes } = this.state;
+        const { questions, questionTypes, questionSelectDisabled, titledisabled } = this.state;
         return (
             <div id="welcome" className="container">
                 <h1 className="text-center">Create Quiz</h1>
                 <form onSubmit={this.handleSubmitTitle}>
                     <fieldset>
-                        <input type="text" name="quizTitle" id="quizTitle"/>
+                        <input type="text" name="quizTitle" id="quizTitle" disabled={titledisabled}/>
                     </fieldset>
                     <button type="submit">Save Title</button>
+                    <button onClick={this.handleEditTitle}>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button>
                 </form>
-                <div id="renderedForm" ref={this.renderedForm}>
-                    {questionTypes.map((el,i) => {
-                        switch(el) {
-                            case "multiple-choice":
-                                return <MultiChoice key={i} index={i} updateQuiz={this.updateQuiz}/>;
+                <div id="renderedQuestions" ref={this.renderQuestions}>
+                    {this.state.questions.map((el,i) => {
+                        switch(el.type) {
                             case "fill-in-blank":
-                                console.log('do something');
-                                return <FillBlank key={i} index={i} updateQuiz={this.updateQuiz}/>;
-                            case "circuit":
-                                return <Circuit key={i} index={i}/>;
-                            case "question-type":
-                                return;
+                                return <div className={el.type} key={i}><p><strong>Question:</strong>{el.question}</p>
+                                <p><strong>Answer:</strong>{el.answer}</p></div>
+                            case "multiple-choice":
+                                return  <div className={el.type} key={i}>
+                                            <p>{el.question}</p>
+                                            <p>{el.answerChoice1}</p>
+                                            <p>{el.answerChoice2}</p>
+                                            <p>{el.answerChoice3}</p>
+                                            <p>{el.answerChoice4}</p>
+                                            <p>{el.correctAnswer}</p>
+                                        </div>
                         }
                     })}
                 </div>
+                <div id="renderedForm" ref={this.renderedForm}>
+                    {(() => {
+                        switch(this.state.questionType) {
+                            case "multiple-choice":
+                                return <MultiChoice updateQuiz={this.updateQuiz}/>;
+                            case "fill-in-blank":
+                                return <FillBlank updateQuiz={this.updateQuiz}/>;
+                            case "circuit":
+                                return <Circuit updateQuiz={this.updateQuiz}/>;
+                            case "question-type":
+                                return;
+                        }
+                    })()}
+                </div>
                 <label htmlFor="questionType">Select Question Type:</label>
-                <select id="questionType" ref={this.questionType} onChange={this.renderQuestionType}>
+                <select id="questionType" ref={this.questionType} disabled={questionSelectDisabled} onChange={this.renderQuestionType}>
                     <option value="question-type">Question Type...</option>
                     <option value="fill-in-blank">Fill In The Blank</option>
                     <option value="multiple-choice">Multiple Choice</option>
