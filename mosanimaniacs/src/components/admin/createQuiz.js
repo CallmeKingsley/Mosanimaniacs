@@ -139,10 +139,7 @@ class CreateQuiz extends Component {
                             case "multiple-choice":
                                 return  <div className={el.type} key={i}>
                                             <p>{el.question}</p>
-                                            <p>{el.answerChoice1}</p>
-                                            <p>{el.answerChoice2}</p>
-                                            <p>{el.answerChoice3}</p>
-                                            <p>{el.answerChoice4}</p>
+                                            {el.answerChoices.map((answer,index) => <p key={index}>{answer}</p>)}
                                             <p>{el.correctAnswer}</p>
                                         </div>
                         }
