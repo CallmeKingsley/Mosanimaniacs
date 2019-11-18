@@ -24,12 +24,8 @@ class FillBlankForm extends Component {
     }
 
     render() {
-        const { className, key, question, answer } = this.props;
         return (
             <form onSubmit={this.handleSubmitQuestion}>
-                {/* <div className={el.type} key={i}><p><strong>Question:</strong>{el.question}</p>
-                                <p><strong>Answer:</strong>{el.answer}</p>
-                                <button>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button></div> */}
                 <fieldset>
                     <div>
                         <input type="text" name="questionTitle" ref={this.question} 

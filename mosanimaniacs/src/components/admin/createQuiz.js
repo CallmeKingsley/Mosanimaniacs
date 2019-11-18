@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import '../../css/Welcome.css';
-import MultiChoice from './questionTypes/multChoice';
-import FillBlank from './questionTypes/fillBlank';
-import Circuit from './questionTypes/circuit';
-
+import MultiChoiceForm from './questionForms/multChoiceForm';
+import FillBlankForm from './questionForms/fillBlankForm';
+import CircuitForm from './questionForms/circuitForm';
+// import MultiChoiceQuestion from './questionTypes/multChoice';
+// import FillBlankQuestion from './questionTypes/fillBlank';
+// import CircuitQuestion from './questionTypes/circuit';
 class CreateQuiz extends Component {
 
     constructor(props) {
@@ -14,7 +16,6 @@ class CreateQuiz extends Component {
         this.renderedForm = React.createRef();
         this.renderQuestions = React.createRef();
         this.renderQuestionType = this.renderQuestionType.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitTitle = this.handleSubmitTitle.bind(this);
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
         this.updateQuiz = this.updateQuiz.bind(this);
@@ -50,28 +51,6 @@ class CreateQuiz extends Component {
             console.log(this.data);  
             });
       }
-
-    handleSubmit (e) {
-        e.preventDefault();
-        console.log(e.children);
-        // const data = new FormData(e.target);
-        // console.log(data);
-        let res = this.stringifyFormData(new FormData(e.target));
-        // this.setState({
-        //     res: stringifyFormData(data),
-        //   });
-          //////////
-        //   let data = new Promise((resolve, reject) => {
-        //       resolve(new FormData(e.target));
-        //       reject((err) => console.log(err));
-        //   });
-        //   data()
-        //     .then((json) => {
-        //         console.log(json);
-        //         return json;
-        //     })
-        //   console.log(data);
-    }
 
     handleSubmitTitle (e) {
         e.preventDefault();
@@ -134,8 +113,12 @@ class CreateQuiz extends Component {
                     {this.state.questions.map((el,i) => {
                         switch(el.type) {
                             case "fill-in-blank":
-                                return <div className={el.type} key={i}><p><strong>Question:</strong>{el.question}</p>
-                                <p><strong>Answer:</strong>{el.answer}</p></div>
+                                return <FillBlankQuestion 
+                                            className={el.type}
+                                            key={i}
+                                            question={el.question}
+                                            answer={el.answer}
+                                        />
                             case "multiple-choice":
                                 return  <div className={el.type} key={i}>
                                             <p>{el.question}</p>
@@ -149,11 +132,11 @@ class CreateQuiz extends Component {
                     {(() => {
                         switch(this.state.questionType) {
                             case "multiple-choice":
-                                return <MultiChoice updateQuiz={this.updateQuiz}/>;
+                                return <MultiChoiceForm updateQuiz={this.updateQuiz}/>;
                             case "fill-in-blank":
-                                return <FillBlank updateQuiz={this.updateQuiz}/>;
+                                return <FillBlankForm updateQuiz={this.updateQuiz}/>;
                             case "circuit":
-                                return <Circuit updateQuiz={this.updateQuiz}/>;
+                                return <CircuitForm updateQuiz={this.updateQuiz}/>;
                             case "question-type":
                                 return;
                         }

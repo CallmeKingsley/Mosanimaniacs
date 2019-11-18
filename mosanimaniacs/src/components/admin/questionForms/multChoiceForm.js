@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import '../../../css/createQuiz.css';
 
-class MultipleChoice extends Component {
+class MultipleChoiceForm extends Component {
 
     constructor(props) {
         super(props);
@@ -83,4 +83,4 @@ class MultipleChoice extends Component {
     }
 }
 
-export default MultipleChoice;
+export default MultipleChoiceForm;
