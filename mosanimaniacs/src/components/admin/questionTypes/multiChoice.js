@@ -1,20 +1,31 @@
 import React, { Component } from "react";
 import '../../../css/createQuiz.css';
 
-class MultipleChoiceForm extends Component {
+class MultipleChoiceQuestion extends Component {
 
     constructor(props) {
         super(props);
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
         this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
         this.form = React.createRef();
         this.data = {};
         this.state = {
             type: "multiple-choice",
             question: '',
             answerChoices: [],
-            correctAnswer: ''  
+            correctAnswer: '',
+            isEdit: false
           };
+    }
+
+    componentDidMount() {
+        const { className, key, question, answerChoices, correctAnswer } = this.props;
+        this.setState({
+            question,
+            answerChoices,
+            correctAnswer
+        })
     }
 
     handleSubmitQuestion(e) {
@@ -28,6 +39,7 @@ class MultipleChoiceForm extends Component {
             inputs.answerChoice3.value
         ];
         this.setState({
+            isEdit: false,
             question: inputs.questionTitle.value,
             answerChoices: answerChoices,
             correctAnswer: answerChoices.reduce((acc,el,i) => {
@@ -44,43 +56,71 @@ class MultipleChoiceForm extends Component {
         this.setState({correctAnswer: parseInt(e.target.id)});
     }
 
+    handleEdit() {
+        console.log(this.state.answerChoices);
+        this.setState({isEdit: true});
+    }
+
     render() {
-        const { answerChoice0, answerChoice1, answerChoice2, answerChoice3 } = this.state;
+        const { question, answerChoices, isEdit } = this.state;
+        const { className, key, theQuestion, theAnswerChoices, theCorrectAnswer } = this.props;
         return (
-            <form onSubmit={this.handleSubmitQuestion} ref={this.form}>
-                <div>
-                    <input type="text" name="questionTitle" className="questionTitle" placeholder="Question"/>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Answer Choice</th>
-                                <th>Correct Answer?</th>
-                            </tr>
-                            <tr>
-                                <td><input type="text"   name="answerChoice0" className="answerChoice0"/></td>
-                                <td><input type="radio" id="0" onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice0}/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="text"   name="answerChoice1" className="answerChoice1"/></td>
-                                <td><input type="radio" id="1" onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice1}/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="text"   name="answerChoice2" className="answerChoice2"/></td>
-                                <td><input type="radio" id="2" onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice2}/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="text"   name="answerChoice3" className="answerChoice3"/></td>
-                                <td><input type="radio" id="3" onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice3}/></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button className="save">Save</button>
-                    <button className="delete">Delete</button>
-                    <br/>
-                </div>
-            </form>
+            <>
+            {(() => {
+                if (isEdit) {
+                    return <form onSubmit={this.handleSubmitQuestion} ref={this.form}>
+                    <div>
+                        <input type="text" name="questionTitle" className="questionTitle" placeholder="Question" value={question}/>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Answer Choice</th>
+                                    <th>Correct Answer?</th>
+                                </tr>
+                                {/* <tr>
+                                    <td><input type="text" name="answerChoice0" className="answerChoice0"/></td>
+                                    <td><input type="radio" id="0" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[0]}/></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="answerChoice1" className="answerChoice1"/></td>
+                                    <td><input type="radio" id="1" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[1]}/></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="answerChoice2" className="answerChoice2"/></td>
+                                    <td><input type="radio" id="2" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[2]}/></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="answerChoice3" className="answerChoice3"/></td>
+                                    <td><input type="radio" id="3" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[3]}/></td>
+                                </tr> */}
+                                {answerChoices.map((answerChoice,index) => {
+                                    return  <tr>
+                                                <td><input type="text" name={`answerChoice${index}`} className={`answerChoice${index}`}/></td>
+                                                <td><input type="radio" id={index} onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice}/></td>
+                                            </tr>
+                                })}
+                            </tbody>
+                        </table>
+                        <button className="save">Save</button>
+                        <button className="delete">Delete</button>
+                        <br/>
+                    </div>
+                </form>
+                } else {
+                    return  <div className={className} key={key}>
+                                <p><strong>Question</strong>: {theQuestion}</p>
+                                <p><strong>Answer Choices</strong>:</p>
+                                <ul>
+                                    {theAnswerChoices.map((answer,index) => <li key={index}>{answer}</li>)}
+                                </ul>
+                                <p><strong>Correct Answer</strong>: {theCorrectAnswer}</p>
+                                <button onClick={this.handleEdit}>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button>
+                            </div>    
+                }
+            })()}
+            </>
         )
     }
 }
 
-export default MultipleChoiceForm;
+export default MultipleChoiceQuestion;

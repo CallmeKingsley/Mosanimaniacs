@@ -4,9 +4,9 @@ import '../../css/Welcome.css';
 import MultiChoiceForm from './questionForms/multChoiceForm';
 import FillBlankForm from './questionForms/fillBlankForm';
 import CircuitForm from './questionForms/circuitForm';
-// import MultiChoiceQuestion from './questionTypes/multChoice';
-// import FillBlankQuestion from './questionTypes/fillBlank';
-// import CircuitQuestion from './questionTypes/circuit';
+import MultiChoiceQuestion from './questionTypes/multiChoice';
+import FillBlankQuestion from './questionTypes/fillBlank';
+import CircuitQuestion from './questionTypes/circuit';
 class CreateQuiz extends Component {
 
     constructor(props) {
@@ -118,13 +118,22 @@ class CreateQuiz extends Component {
                                             key={i}
                                             question={el.question}
                                             answer={el.answer}
+                                            updateQuiz={this.updateQuiz}
                                         />
                             case "multiple-choice":
-                                return  <div className={el.type} key={i}>
-                                            <p>{el.question}</p>
-                                            {el.answerChoices.map((answer,index) => <p key={index}>{answer}</p>)}
-                                            <p>{el.correctAnswer}</p>
-                                        </div>
+                                // return  <div className={el.type} key={i}>
+                                //             <p>{el.question}</p>
+                                //             {el.answerChoices.map((answer,index) => <p key={index}>{answer}</p>)}
+                                //             <p>{el.correctAnswer}</p>
+                                //         </div>
+                                return <MultiChoiceQuestion
+                                            className={el.type}
+                                            key={i}
+                                            theQuestion={el.question}
+                                            theAnswerChoices={el.answerChoices}
+                                            theAorrectAnswer={el.correctAnswer}
+                                            updateQuiz={this.updateQuiz}
+                                        />
                         }
                     })}
                 </div>
