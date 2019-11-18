@@ -20,6 +20,7 @@ class CreateQuiz extends Component {
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
         this.updateQuiz = this.updateQuiz.bind(this);
         this.handleEditTitle = this.handleEditTitle.bind(this);
+        this.updateQuestion = this.updateQuestion.bind(this);
         this.data = [];
 
         this.state = {
@@ -73,7 +74,7 @@ class CreateQuiz extends Component {
     }
 
     updateQuiz(data) {
-        console.log(data);
+        console.log(data.index);
         this.setState(prevState => {
             return {
                 questionType: "",
@@ -82,6 +83,48 @@ class CreateQuiz extends Component {
                     ...prevState.questions,
                     data
                 ]
+            }
+        });
+    }
+    /*
+case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
+            const updatePlayerList = state.players.map((player, index) => {
+            if(index === action.index){
+            return {
+              ...player,
+               score: player.score + action.score,
+               updated: time
+             };
+          }
+          return player;
+        });
+              return {
+                  ...state,
+                  players: updatePlayerList
+              };
+        }
+    */
+    updateQuestion(data) {
+        console.log(data);
+        this.setState(prevState => {
+            // const updatedList = [
+            //     ...prevState.questions.slice(0, data.index),
+            //     ...prevState.questions.slice(data.index)
+            // ]
+            // console.log(updatedList);
+            // return {
+            //     questions: updatedList
+            // }
+            const updatedList = prevState.questions.map((question, num) => {
+                if (num === data.index) {
+                    return {
+                        ...data
+                    }
+                }
+            });
+            return {
+                ...prevState,
+                questions: updatedList
             }
         });
     }
@@ -116,9 +159,10 @@ class CreateQuiz extends Component {
                                 return <FillBlankQuestion 
                                             className={el.type}
                                             key={i}
+                                            index={i}
                                             question={el.question}
                                             answer={el.answer}
-                                            updateQuiz={this.updateQuiz}
+                                            updateQuestion={this.updateQuestion}
                                         />
                             case "multiple-choice":
                                 // return  <div className={el.type} key={i}>
@@ -129,10 +173,11 @@ class CreateQuiz extends Component {
                                 return <MultiChoiceQuestion
                                             className={el.type}
                                             key={i}
+                                            index={i}
                                             theQuestion={el.question}
                                             theAnswerChoices={el.answerChoices}
-                                            theAorrectAnswer={el.correctAnswer}
-                                            updateQuiz={this.updateQuiz}
+                                            theCorrectAnswer={el.correctAnswer}
+                                            updateQuestion={this.updateQuestion}
                                         />
                         }
                     })}

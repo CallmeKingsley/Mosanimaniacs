@@ -8,27 +8,46 @@ class FillBlankQuestion extends Component {
 
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
         this.question = React.createRef();
+        this.handleEdit = this.handleEdit.bind(this);
         this.answer = React.createRef();
         this.state = {
-            isEdit: false
+            isEdit: false,
+            type: "fill-in-blank",
+            question: "",
+            answer: "",
+            index: 0
         }
+    }
+
+    componentDidMount() {
+        const { index, question, answer } = this.props;
+        this.setState({
+            question,
+            answer,
+            index
+        })
+    }
+
+    handleEdit() {
+        console.log(this.state.answerChoices);
+        this.setState({isEdit: true});
     }
 
     handleSubmitQuestion(e) {
         e.preventDefault();
-        let stuff = [this.question.current.value,this.answer.current.value];
-        let otherStuff = {
-            type: "fill-in-blank",
+        this.setState({
             question: this.question.current.value,
-            answer: this.answer.current.value
-        };
-        // let res = this.stringifyFormData(otherStuff);
-        this.props.updateQuiz(otherStuff);
+            answer: this.answer.current.value,
+        },() => {
+            this.props.updateQuiz(this.state);
+        });
     }
 
     render() {
         const { className, key, question, answer } = this.props;
         return (
+            // <>
+            // </>
             // <form onSubmit={this.handleSubmitQuestion}>
             //     <fieldset>
             //         <div>

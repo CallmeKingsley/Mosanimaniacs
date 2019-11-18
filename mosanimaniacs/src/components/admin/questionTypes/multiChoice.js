@@ -15,16 +15,18 @@ class MultipleChoiceQuestion extends Component {
             question: '',
             answerChoices: [],
             correctAnswer: '',
-            isEdit: false
+            isEdit: false,
+            index: 0
           };
     }
 
     componentDidMount() {
-        const { className, key, question, answerChoices, correctAnswer } = this.props;
+        const { className, index, theQuestion, theAnswerChoices, theCorrectAnswer } = this.props;
         this.setState({
-            question,
-            answerChoices,
-            correctAnswer
+            question: theQuestion,
+            answerChoices: theAnswerChoices,
+            correctAnswer: theCorrectAnswer,
+            index
         })
     }
 
@@ -48,7 +50,8 @@ class MultipleChoiceQuestion extends Component {
                 }
             },"")
         }, () => {
-            this.props.updateQuiz(this.state);
+            console.log(this.state);
+            this.props.updateQuestion(this.state);
         });
     }
 
@@ -63,14 +66,14 @@ class MultipleChoiceQuestion extends Component {
 
     render() {
         const { question, answerChoices, isEdit } = this.state;
-        const { className, key, theQuestion, theAnswerChoices, theCorrectAnswer } = this.props;
+        const { className, theQuestion, theAnswerChoices, theCorrectAnswer } = this.props;
         return (
             <>
             {(() => {
                 if (isEdit) {
                     return <form onSubmit={this.handleSubmitQuestion} ref={this.form}>
                     <div>
-                        <input type="text" name="questionTitle" className="questionTitle" placeholder="Question" value={question}/>
+                        <input type="text" name="questionTitle" className="questionTitle" placeholder="Question" placeholder={question}/>
                         <table>
                             <tbody>
                                 <tr>
@@ -95,7 +98,7 @@ class MultipleChoiceQuestion extends Component {
                                 </tr> */}
                                 {answerChoices.map((answerChoice,index) => {
                                     return  <tr>
-                                                <td><input type="text" name={`answerChoice${index}`} className={`answerChoice${index}`}/></td>
+                                                <td><input type="text" name={`answerChoice${index}`} className={`answerChoice${index}`} placeholder={answerChoice}/></td>
                                                 <td><input type="radio" id={index} onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice}/></td>
                                             </tr>
                                 })}
@@ -107,7 +110,7 @@ class MultipleChoiceQuestion extends Component {
                     </div>
                 </form>
                 } else {
-                    return  <div className={className} key={key}>
+                    return  <div className={className}>
                                 <p><strong>Question</strong>: {theQuestion}</p>
                                 <p><strong>Answer Choices</strong>:</p>
                                 <ul>
