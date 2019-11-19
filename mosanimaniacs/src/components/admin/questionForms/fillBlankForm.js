@@ -17,9 +17,9 @@ class FillBlankForm extends Component {
         let otherStuff = {
             type: "fill-in-blank",
             question: this.question.current.value,
-            answer: this.answer.current.value
+            answer: this.answer.current.value,
+            index: this.props.length
         };
-        // let res = this.stringifyFormData(otherStuff);
         this.props.updateQuiz(otherStuff);
     }
 

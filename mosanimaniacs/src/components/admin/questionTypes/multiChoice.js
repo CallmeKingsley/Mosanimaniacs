@@ -8,6 +8,8 @@ class MultipleChoiceQuestion extends Component {
         this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
         this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleEditQuestion = this.handleEditQuestion.bind(this);
+        this.handleEditAnswerChoices = this.handleEditAnswerChoices.bind(this);
         this.form = React.createRef();
         this.data = {};
         this.state = {
@@ -33,91 +35,133 @@ class MultipleChoiceQuestion extends Component {
     handleSubmitQuestion(e) {
         e.preventDefault();
         e.persist();
-        const inputs = e.target.getElementsByTagName('input');
-        const answerChoices = [
-            inputs.answerChoice0.value,
-            inputs.answerChoice1.value,
-            inputs.answerChoice2.value,
-            inputs.answerChoice3.value
-        ];
         this.setState({
             isEdit: false,
-            question: inputs.questionTitle.value,
-            answerChoices: answerChoices,
-            correctAnswer: answerChoices.reduce((acc,el,i) => {
-                if (i === this.state.correctAnswer) {
-                    return el;
-                }
-            },"")
         }, () => {
             console.log(this.state);
             this.props.updateQuestion(this.state);
         });
     }
 
+    handleEditAnswerChoices(e) {
+        e.preventDefault();
+        e.persist();
+        let answerIndex;
+        switch(e.target.name) {
+            case 'answerChoice0':
+                answerIndex = 0;
+                break;
+            case 'answerChoice1':
+                answerIndex = 1;
+                break;
+            case 'answerChoice2':
+                answerIndex = 2;
+                break;
+            case 'answerChoice3':
+                answerIndex = 3;
+                break;
+            default:
+                break;
+        }
+        this.setState(prevState => {
+            const updatedAnswerchoices = this.state.answerChoices.map((current,index) => {
+                if (answerIndex === index) {
+                    return e.target.value;
+                } else {
+                    return this.state.answerChoices[index];
+                }
+            });
+            return {
+                ...prevState,
+                answerChoices: updatedAnswerchoices
+            }
+        });
+
+    }
+
+        /*
+case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
+            const updatePlayerList = state.players.map((player, index) => {
+            if(index === action.index){
+            return {
+              ...player,
+               score: player.score + action.score,
+               updated: time
+             };
+          }
+          return player;
+        });
+              return {
+                  ...state,
+                  players: updatePlayerList
+              };
+        }
+    */
+
+    handleEditQuestion(e) {
+        e.preventDefault();
+        e.persist();
+        this.setState({
+            question: e.target.value
+        });
+    }
+
     handleCorrectAnswer(e) {
-        this.setState({correctAnswer: parseInt(e.target.id)});
+        let answer;
+        this.state.answerChoices.reduce((acc,el,i) => {
+            if (i === parseInt(e.target.id)) {
+                answer = el;
+            }
+        },"");
+        this.setState({
+            correctAnswer: answer
+        });
+
     }
 
     handleEdit() {
-        console.log(this.state.answerChoices);
         this.setState({isEdit: true});
     }
 
     render() {
-        const { question, answerChoices, isEdit } = this.state;
-        const { className, theQuestion, theAnswerChoices, theCorrectAnswer } = this.props;
+        const { question, answerChoices, isEdit, correctAnswer } = this.state;
+        const { className, deleteQuestion } = this.props;
         return (
             <>
             {(() => {
                 if (isEdit) {
                     return <form onSubmit={this.handleSubmitQuestion} ref={this.form}>
                     <div>
-                        <input type="text" name="questionTitle" className="questionTitle" placeholder="Question" placeholder={question}/>
+                        <input type="text" name="questionTitle" onChange={this.handleEditQuestion} className="questionTitle" placeholder="Question" defaultValue={question}/>
                         <table>
                             <tbody>
                                 <tr>
                                     <th>Answer Choice</th>
                                     <th>Correct Answer?</th>
                                 </tr>
-                                {/* <tr>
-                                    <td><input type="text" name="answerChoice0" className="answerChoice0"/></td>
-                                    <td><input type="radio" id="0" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[0]}/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="answerChoice1" className="answerChoice1"/></td>
-                                    <td><input type="radio" id="1" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[1]}/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="answerChoice2" className="answerChoice2"/></td>
-                                    <td><input type="radio" id="2" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[2]}/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="answerChoice3" className="answerChoice3"/></td>
-                                    <td><input type="radio" id="3" onChange={this.handleCorrectAnswer} name="correctAnswer" value={theAnswerChoices[3]}/></td>
-                                </tr> */}
                                 {answerChoices.map((answerChoice,index) => {
                                     return  <tr>
-                                                <td><input type="text" name={`answerChoice${index}`} className={`answerChoice${index}`} placeholder={answerChoice}/></td>
-                                                <td><input type="radio" id={index} onChange={this.handleCorrectAnswer} name="correctAnswer" value={answerChoice}/></td>
+                                                <td><input type="text" onChange={this.handleEditAnswerChoices} name={`answerChoice${index}`} className={`answerChoice${index}`} defaultValue={answerChoice}/></td>
+                                                <td><input type="radio" id={index} onChange={this.handleCorrectAnswer} name="correctAnswer" defaultValue={answerChoice}/></td>
                                             </tr>
                                 })}
                             </tbody>
                         </table>
                         <button className="save">Save</button>
-                        <button className="delete">Delete</button>
+                        <button className="delete" onClick={() => deleteQuestion(this.state)}>Delete</button>
                         <br/>
                     </div>
                 </form>
                 } else {
                     return  <div className={className}>
-                                <p><strong>Question</strong>: {theQuestion}</p>
+                                <p><strong>Question</strong>: {question}</p>
                                 <p><strong>Answer Choices</strong>:</p>
                                 <ul>
-                                    {theAnswerChoices.map((answer,index) => <li key={index}>{answer}</li>)}
+                                    {answerChoices.map((answer,index) => <li key={index}>{answer}</li>)}
                                 </ul>
-                                <p><strong>Correct Answer</strong>: {theCorrectAnswer}</p>
+                                <p><strong>Correct Answer</strong>: {correctAnswer}</p>
                                 <button onClick={this.handleEdit}>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button className="delete" onClick={() => deleteQuestion(this.state)}>Delete</button>
                             </div>    
                 }
             })()}

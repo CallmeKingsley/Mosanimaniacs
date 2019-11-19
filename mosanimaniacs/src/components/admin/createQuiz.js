@@ -21,6 +21,7 @@ class CreateQuiz extends Component {
         this.updateQuiz = this.updateQuiz.bind(this);
         this.handleEditTitle = this.handleEditTitle.bind(this);
         this.updateQuestion = this.updateQuestion.bind(this);
+        this.deleteQuestion = this.deleteQuestion.bind(this);
         this.data = [];
 
         this.state = {
@@ -107,25 +108,32 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
     updateQuestion(data) {
         console.log(data);
         this.setState(prevState => {
-            // const updatedList = [
-            //     ...prevState.questions.slice(0, data.index),
-            //     ...prevState.questions.slice(data.index)
-            // ]
-            // console.log(updatedList);
-            // return {
-            //     questions: updatedList
-            // }
             const updatedList = prevState.questions.map((question, num) => {
                 if (num === data.index) {
                     return {
                         ...data
                     }
+                } else {
+                    return prevState.questions[num];
                 }
             });
+            console.log(updatedList);
             return {
                 ...prevState,
                 questions: updatedList
             }
+        });
+    }
+
+    deleteQuestion(data) {
+        // const removeQuestionList = [
+        //     ...this.state.questions.slice(0,data.index),
+        //     ...this.state.questions.slice(data.index + 1)
+        // ];
+        this.setState(prevState => {
+            return {
+                questions: prevState.questions.filter(el => el.index !== data.index)
+            };
         });
     }
 
@@ -163,13 +171,9 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
                                             question={el.question}
                                             answer={el.answer}
                                             updateQuestion={this.updateQuestion}
+                                            deleteQuestion={this.deleteQuestion}
                                         />
                             case "multiple-choice":
-                                // return  <div className={el.type} key={i}>
-                                //             <p>{el.question}</p>
-                                //             {el.answerChoices.map((answer,index) => <p key={index}>{answer}</p>)}
-                                //             <p>{el.correctAnswer}</p>
-                                //         </div>
                                 return <MultiChoiceQuestion
                                             className={el.type}
                                             key={i}
@@ -178,6 +182,7 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
                                             theAnswerChoices={el.answerChoices}
                                             theCorrectAnswer={el.correctAnswer}
                                             updateQuestion={this.updateQuestion}
+                                            deleteQuestion={this.deleteQuestion}
                                         />
                         }
                     })}
@@ -186,9 +191,15 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
                     {(() => {
                         switch(this.state.questionType) {
                             case "multiple-choice":
-                                return <MultiChoiceForm updateQuiz={this.updateQuiz}/>;
+                                return <MultiChoiceForm 
+                                            updateQuiz={this.updateQuiz}
+                                            length={this.state.questions.length}
+                                        />;
                             case "fill-in-blank":
-                                return <FillBlankForm updateQuiz={this.updateQuiz}/>;
+                                return <FillBlankForm 
+                                            updateQuiz={this.updateQuiz}
+                                            length={this.state.questions.length}
+                                        />;
                             case "circuit":
                                 return <CircuitForm updateQuiz={this.updateQuiz}/>;
                             case "question-type":

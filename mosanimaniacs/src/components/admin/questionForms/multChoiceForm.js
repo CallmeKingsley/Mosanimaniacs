@@ -13,7 +13,8 @@ class MultipleChoiceForm extends Component {
             type: "multiple-choice",
             question: '',
             answerChoices: [],
-            correctAnswer: ''  
+            correctAnswer: '',
+            index: this.props.length
           };
     }
 
