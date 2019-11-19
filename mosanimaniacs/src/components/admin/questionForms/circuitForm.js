@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../../../css/Welcome.css';
+import '../../../css/createQuiz.css';
 
 class CircuitForm extends Component {
     render() {
@@ -7,8 +8,10 @@ class CircuitForm extends Component {
             <div>
                 <label htmlFor="circuitType">Select Circuit Type:</label>
                 <select id="circuitType">
-                    <option value="fill-in-blank">Series</option>
-                    <option value="multiple-choice">Parallel</option>
+                    <option value="series" className="circuitOption">
+                        {/* <img srcSet={require("../../../images/Asset3.png")}/> */}
+                        Series
+                    </option>
                     {/* Add more options here and have image previews */}
                 </select>
                 <button className="save">Save</button>

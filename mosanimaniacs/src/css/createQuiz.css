@@ -1,3 +1,8 @@
 table tr td {
     border: 1px solid black;
 }
+
+.circuitOption {
+    background-color: black;
+    background-image: url("../images/Asset3.png");
+}
