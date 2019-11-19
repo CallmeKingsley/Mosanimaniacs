@@ -2,7 +2,17 @@ table tr td {
     border: 1px solid black;
 }
 
-.circuitOption {
+.circuitQuestionForm {
+    position: relative;
+}
+
+.circuitImage {
+    position: absolute;
+    right: -200px;
     background-color: black;
     background-image: url("../images/Asset3.png");
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    display: none;
 }
