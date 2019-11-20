@@ -10,6 +10,7 @@ import Question from './components/quiz/Question';
 import QuizResults from './components/quiz/QuizResults';
 import CreateQuiz from './components/admin/createQuiz';
 import QuizBank from './components/admin/quizBank';
+import EditQuiz from './components/admin/editQuiz';
 import './App.css';
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
             <Route path="/quiz/question/:id" component={Question}></Route> {/* The indiviudal questions*/}
             <Route path="/quiz/results" component={QuizResults}></Route> {/* The final score screen */}
             <Route exact path="/admin" component={QuizBank}></Route> {/* The admin main screen */}
-            <Route path="admin/edit/:quizId" component={CreateQuiz}></Route> {/* The edit quiz screen */}
+            <Route path="/admin/edit/:quizId" component={EditQuiz}></Route> {/* The edit quiz screen */}
             <Route path="/admin/create" component={CreateQuiz}></Route> {/* The create quiz component */}
           </Switch>
         </Router>

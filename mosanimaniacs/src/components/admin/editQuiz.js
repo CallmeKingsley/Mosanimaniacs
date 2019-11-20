@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import '../../css/Welcome.css';
 import {Link} from 'react-router-dom';
-import { submitQuiz } from '../../redux/actions/quizAdmin';
+import { submitQuiz, getAllQuizzes } from '../../redux/actions/quizAdmin';
 import MultiChoiceForm from './questionForms/multChoiceForm';
 import FillBlankForm from './questionForms/fillBlankForm';
 // import CircuitForm from './questionForms/circuitForm';
 import MultiChoiceQuestion from './questionTypes/multiChoice';
 import FillBlankQuestion from './questionTypes/fillBlank';
 // import CircuitQuestion from './questionTypes/circuit';
-class CreateQuiz extends Component {
+
+class EditQuiz extends Component {
 
     constructor(props) {
         super(props);
@@ -38,6 +39,7 @@ class CreateQuiz extends Component {
     }
 
     componentDidMount() {
+        alert('hey');
         console.log(this.props.selectedQuiz);
     }
     
@@ -201,9 +203,11 @@ class CreateQuiz extends Component {
 }
 
 function mapStateToProps(state) {
+    const url = window.location.pathname;
+    const parts = url.split('/');
+    const urlQuizId = parts[parts.length-1];
     const quizzes = state.QuizzesReducer.quizzes;
-    const selectedQuiz = state.QuizzesReducer.quizzes.find(x => x._id === "5dd4bbba158aef69b968e0e0");
-
+    const selectedQuiz = state.QuizzesReducer.quizzes.find(x => x._id === urlQuizId);
     return {
         quizzes,
         selectedQuiz
@@ -211,5 +215,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
+    getAllQuizzes,
     submitQuiz
-})(CreateQuiz);
+})(EditQuiz);

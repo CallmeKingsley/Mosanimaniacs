@@ -27,6 +27,7 @@ class QuizBank extends Component {
                                     Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i>
                                 </button>
                             </Link>
+                            <button className="btn btn-danger">Delete <i className="fa fa-trash" aria-hidden="true"></i></button>
                         </div> 
             })
         )
