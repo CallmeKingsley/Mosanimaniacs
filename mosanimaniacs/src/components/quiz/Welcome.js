@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 class Welcome extends Component {
 
     componentDidMount() {
-        this.props.getAllQuizzes('/api/quizzes');
+        // this.props.getAllQuizzes('/api/quizzes');
     }
 
     render() {

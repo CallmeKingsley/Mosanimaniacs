@@ -1,6 +1,11 @@
 const express = require('express'); // eslint-disable-line import/no-commonjs
 const bodyParser = require('body-parser');
 const Quiz = require('../models/Quizzes');
+// const mongo = require('mongodb').MongoClient;
+// const objectId = require('mongodb').ObjectID;
+// const assert = require('assert');
+
+// const url = 'mongodb://<dbuser>:<dbpassword>@ds229068.mlab.com:29068/heroku_b30fmcz3';
 // eslint-disable-line import/no-commonjs
 const router = express.Router();
 const jsonParser = bodyParser.json();
@@ -41,6 +46,7 @@ router.post('/', jsonParser, (req, res) => {
       });
     });
 });
+
 router.get('/:quizId', (req, res) => {
   const id = req.params.quizId;
   Quiz.findById(id)
@@ -59,5 +65,73 @@ router.get('/:quizId', (req, res) => {
     });
 });
 
+// router.post('/:quizId', (req, res) => {
+//   const db = req.db;
+//   const quizToUpdate = req.params.id;
+//   const quiz = {
+//     quizTitle: req.body.quizTitle,
+//     questions: req.body.questions,
+//   };
+//   const id = req.body.id;
+//   console.log(`the quiz is ${quiz} and the id is ${id}`);
+//   mongo.connect(url, (err, db) => {
+//     assert.equal(null, err);
+//     db.collection('quizzes').updateOne({"_id": objectId(id)}, {$set: quiz}, (err, result) => {
+//       assert.equal(null, err);
+//       console.log('Item updated');
+//       db.close();
+//     });
+//   });
+// });
+
+router.post('/:quizId', jsonParser, (req, res) => {
+  // const quiz = new Quiz({
+  //     quizTitle: req.body.quizTitle,
+  //     questions: req.body.questions,
+  // });
+  const id = req.params.quizId;
+  console.log(req.params.quizId);
+  console.log(id, JSON.stringify(req.body.quizTitle, null));
+  
+  Quiz.findById(id, function(err, doc) {
+    if (err) {
+      console.error('error, no entry found');
+    }
+    doc.quizTitle = req.body.quizTitle;
+    doc.questions = req.body.questions;
+    doc.save();
+  })
+  res.redirect('/');
+});
+
+router.post('/:quizId', (req, res) => {
+  const id = req.params.quizId;
+  Quiz.findOne({_id: id}, (err, foundObject) => {
+    if(err) {
+      console.log(err);
+      res.status(500).send();
+    } else {
+      if (!foundObject) {
+        res.status(404).send();
+      } else {
+        if (req.body.quizTitle) {
+          foundObject.quizTitle = req.body.quizTitle;
+        }
+        if (req.body.questions) {
+          foundObject.questions = req.body.questions;
+        }
+
+        foundObject.save((err, updatedObject) => {
+          if (err) {
+            console.log(err);
+            res.status(500).send();
+          } else {
+            res.send(updatedObject);
+          }
+        });
+      }
+    }
+  });
+});
 
 module.exports = router;

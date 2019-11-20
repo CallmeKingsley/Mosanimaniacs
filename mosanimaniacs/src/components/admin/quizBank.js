@@ -13,8 +13,9 @@ class QuizBank extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllQuizzes('/api/quizzes');
-        // this.renderQuizzes(this.props.quizzes);
+        if (!!this.props.quizzes) {
+            this.props.getAllQuizzes('/api/quizzes');
+        }
     }
 
     renderQuizzes = (quizzes) => {

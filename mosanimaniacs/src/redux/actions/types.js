@@ -18,5 +18,6 @@ export const responses = {
 
 export const quizzes = {
     CREATEQUIZ: 'CREATEQUIZ',
-    GETALLQUIZZES: 'GETALLQUIZZES'
+    GETALLQUIZZES: 'GETALLQUIZZES',
+    UPDATEQUIZ: 'UPDATEQUIZ'
 }

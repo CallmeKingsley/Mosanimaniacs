@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import '../../css/Welcome.css';
 import {Link} from 'react-router-dom';
-import { submitQuiz, getAllQuizzes } from '../../redux/actions/quizAdmin';
+import { submitQuiz, getAllQuizzes, updateQuiz } from '../../redux/actions/quizAdmin';
 import MultiChoiceForm from './questionForms/multChoiceForm';
 import FillBlankForm from './questionForms/fillBlankForm';
 // import CircuitForm from './questionForms/circuitForm';
@@ -18,13 +18,12 @@ class EditQuiz extends Component {
         this.questionType = React.createRef();
         this.renderedForm = React.createRef();
         this.renderQuestions = React.createRef();
-        // this.renderQuestionType = this.renderQuestionType.bind(this);
-        // this.deleteQuestion = this.deleteQuestion.bind(this);
         this.data = [];
 
         this.state = {
             title: "",
             questionType: "",
+            quizId: "",
             /*questionSelectDisabled is the boolean that 
             will disable and re-enable the question type
             select menu*/
@@ -39,17 +38,31 @@ class EditQuiz extends Component {
     }
 
     componentDidMount() {
-        alert('hey');
-        console.log(this.props.selectedQuiz);
+        const { selectedQuiz } = this.props;
+        console.log(selectedQuiz);
+        this.setState({
+            questions: selectedQuiz.questions,
+            title: selectedQuiz.quizTitle,
+            quizId: selectedQuiz._id
+        });
+        console.log(typeof this.props.urlQuizId);
     }
     
     handleSubmitTitle = (e) => {
         e.preventDefault();
-        const title = e.target.quizTitle.value;
         this.setState({
-            title: title,
             titledisabled: true
         });
+    }
+
+    handleChangeTitle = (e) => {
+        e.preventDefault();
+        if (!this.state.titledisabled) {
+            const title = e.target.value;
+            this.setState({
+                title: title,
+            });    
+        }
     }
 
     handleEditTitle = (e) => {
@@ -116,23 +129,25 @@ class EditQuiz extends Component {
         e.target.value = "question-type";
     }
 
-    handleSubmitQuiz = () => {
+    handleUpdateQuiz = () => {
+        const { title, questions, quizId } = this.state;
         let quiz = {
-            quizTitle: this.state.title,
-            questions: this.state.questions
+            quizTitle: title,
+            questions: questions,
+            // quizId: quizId
         }
-        console.log(JSON.stringify(quiz));
-        this.props.submitQuiz('/api/quizzes', quiz);
+        console.log(quiz);
+        this.props.updateQuiz(`/api/quizzes/${this.props.urlQuizId}`, quiz);
     }
 
     render() {
-        const { questions, questionTypes, questionSelectDisabled, titledisabled } = this.state;
+        const { questions, questionTypes, questionSelectDisabled, titledisabled, title } = this.state;
         return (
             <div id="welcome" className="container">
                 <h1 className="text-center">Create Quiz</h1>
                 <form onSubmit={this.handleSubmitTitle}>
                     <fieldset>
-                        <input type="text" name="quizTitle" id="quizTitle" disabled={titledisabled}/>
+                        <input type="text" name="quizTitle" id="quizTitle" onChange={this.handleChangeTitle} disabled={titledisabled} defaultValue={title}/>
                     </fieldset>
                     <button type="submit">Save Title</button>
                     <button onClick={this.handleEditTitle}>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button>
@@ -195,7 +210,7 @@ class EditQuiz extends Component {
                     <option value="multiple-choice">Multiple Choice</option>
                     {/* <option value="circuit">Circuit</option> */}
                 </select>
-                <button onClick={this.handleSubmitQuiz}>Submit!</button>
+                <button onClick={this.handleUpdateQuiz}>Submit!</button>
                 <Link to="/admin"><button type="button" className="btn btn-primary">Back</button></Link>
             </div>
         )
@@ -210,11 +225,13 @@ function mapStateToProps(state) {
     const selectedQuiz = state.QuizzesReducer.quizzes.find(x => x._id === urlQuizId);
     return {
         quizzes,
-        selectedQuiz
+        selectedQuiz,
+        urlQuizId
     }
 }
 
 export default connect(mapStateToProps, {
     getAllQuizzes,
-    submitQuiz
+    submitQuiz,
+    updateQuiz
 })(EditQuiz);

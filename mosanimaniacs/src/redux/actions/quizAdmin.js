@@ -27,3 +27,15 @@ export const getAllQuizzes = url => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const updateQuiz = (url, response) => dispatch => {
+    ax.post(url, response)
+        .then(res => {
+            console.log(res.config.data);
+            dispatch({
+                type: quizzes.UPDATEQUIZ,
+                payload: res.config.data
+            })
+        })
+        .catch(err => console.log(err));
+}
