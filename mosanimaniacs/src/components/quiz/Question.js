@@ -8,15 +8,7 @@ class Question extends Component {
 
     constructor(props) {
         super(props);
-        this.incrementOptionIndex = this.incrementOptionIndex.bind(this);
-        this.pointDecrease = this.pointDecrease.bind(this);
         this.timer = 0;
-        this.startTimer = this.startTimer.bind(this);
-        this.countDown = this.countDown.bind(this);
-        this.checkAnswer = this.checkAnswer.bind(this);
-        this.resetQuestion = this.resetQuestion.bind(this);
-        this.renderNavBtn = this.renderNavBtn.bind(this);
-        this.revealAnswer = this.revealAnswer.bind(this);
         this.answerChoice = [];
         this.nextQuestion = React.createRef();
         this.state = {
@@ -32,7 +24,7 @@ class Question extends Component {
         this.resetQuestion(false);
     }
 
-    renderNavBtn(totalNum, currNum) {
+    renderNavBtn = (totalNum, currNum) => {
         const incIndex = currNum + 1;
         const points = this.state.correct ? this.state.total : 0;
         if (totalNum === currNum) {
@@ -62,7 +54,7 @@ class Question extends Component {
         }
     }
 
-    resetQuestion(bool) {
+    resetQuestion = (bool) => {
 
         if (bool) {
             const {attempted, correct, total} = this.state;
@@ -84,13 +76,13 @@ class Question extends Component {
         this.startTimer();
     }
 
-    startTimer() {
-        if (this.timer == 0 && this.state.seconds > 0) {
+    startTimer = () => {
+        if (this.timer == 0 && this.state.seconds >= 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
     }
 
-    countDown() {
+    countDown = () => {
         // Remove one second, set state so a re-render happens.
         let seconds = this.state.seconds - 1;
         this.setState({
@@ -110,12 +102,12 @@ class Question extends Component {
                 break;
             case 0:
                 this.revealAnswer(true);
-                clearInterval(this.timer);
+                this.timer = 0;
                 break;
         }
     }
 
-    incrementOptionIndex(num) {
+    incrementOptionIndex = (num) => {
         switch(num) {
             case 0:
                 return 'A';
@@ -132,11 +124,11 @@ class Question extends Component {
         }
     }
 
-    pointDecrease(num){
+    pointDecrease = (num) => {
         this.setState({total: this.state.total - num});
     }
 
-    revealAnswer(bool) {
+    revealAnswer = (bool) => {
         let {index, questions} = this.props;
         let correctAnswer = questions[index].Answer;
         this.answerChoice.forEach(el => {
@@ -151,13 +143,16 @@ class Question extends Component {
             this.nextQuestion.current.classList.remove("next-disabled");
             this.setState({
                 attempted: true,
+                seconds: 0,
+
                 correct: false,
                 message: "Time's up! Here is the correct answer. Select the next question button to continue."
-            })    
+            });
+            clearInterval(this.timer);
         }
     }
 
-    checkAnswer(e) {
+    checkAnswer = (e) => {
         let selectedAnswer = e.target.dataset.answer;
         let {index, questions} = this.props;
         let correctAnswer = questions[index].Answer;

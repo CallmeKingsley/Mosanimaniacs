@@ -15,3 +15,8 @@ export const score = {
 export const responses = {
     POSTRESPONSES: 'POSTRESPONSES'
 }
+
+export const quizzes = {
+    CREATEQUIZ: 'CREATEQUIZ',
+    GETALLQUIZZES: 'GETALLQUIZZES'
+}

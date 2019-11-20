@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import ReactDOM from 'react-dom';
+import { connect } from "react-redux";
 import '../../css/Welcome.css';
+import {Link} from 'react-router-dom';
+import { submitQuiz } from '../../redux/actions/quizAdmin';
 import MultiChoiceForm from './questionForms/multChoiceForm';
 import FillBlankForm from './questionForms/fillBlankForm';
-import CircuitForm from './questionForms/circuitForm';
+// import CircuitForm from './questionForms/circuitForm';
 import MultiChoiceQuestion from './questionTypes/multiChoice';
 import FillBlankQuestion from './questionTypes/fillBlank';
-import CircuitQuestion from './questionTypes/circuit';
+// import CircuitQuestion from './questionTypes/circuit';
 class CreateQuiz extends Component {
 
     constructor(props) {
@@ -15,13 +17,8 @@ class CreateQuiz extends Component {
         this.questionType = React.createRef();
         this.renderedForm = React.createRef();
         this.renderQuestions = React.createRef();
-        this.renderQuestionType = this.renderQuestionType.bind(this);
-        this.handleSubmitTitle = this.handleSubmitTitle.bind(this);
-        this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
-        this.updateQuiz = this.updateQuiz.bind(this);
-        this.handleEditTitle = this.handleEditTitle.bind(this);
-        this.updateQuestion = this.updateQuestion.bind(this);
-        this.deleteQuestion = this.deleteQuestion.bind(this);
+        // this.renderQuestionType = this.renderQuestionType.bind(this);
+        // this.deleteQuestion = this.deleteQuestion.bind(this);
         this.data = [];
 
         this.state = {
@@ -42,7 +39,7 @@ class CreateQuiz extends Component {
 
     
 
-    stringifyFormData(fd) {
+    stringifyFormData = (fd) => {
         const { questions } = this.state;
         questions.forEach((el,i) => {
             const questionData = {};
@@ -54,7 +51,7 @@ class CreateQuiz extends Component {
             });
       }
 
-    handleSubmitTitle (e) {
+    handleSubmitTitle = (e) => {
         e.preventDefault();
         const title = e.target.quizTitle.value;
         this.setState({
@@ -63,18 +60,18 @@ class CreateQuiz extends Component {
         });
     }
 
-    handleEditTitle(e) {
+    handleEditTitle = (e) => {
         e.preventDefault();
         this.setState({
             titledisabled: false
         });
     }
 
-    handleSubmitQuestion (e) {
+    handleSubmitQuestion = (e) => {
         console.log(e);
     }
 
-    updateQuiz(data) {
+    updateQuiz = (data) => {
         console.log(data.index);
         this.setState(prevState => {
             return {
@@ -87,25 +84,8 @@ class CreateQuiz extends Component {
             }
         });
     }
-    /*
-case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
-            const updatePlayerList = state.players.map((player, index) => {
-            if(index === action.index){
-            return {
-              ...player,
-               score: player.score + action.score,
-               updated: time
-             };
-          }
-          return player;
-        });
-              return {
-                  ...state,
-                  players: updatePlayerList
-              };
-        }
-    */
-    updateQuestion(data) {
+
+    updateQuestion = (data) => {
         console.log(data);
         this.setState(prevState => {
             const updatedList = prevState.questions.map((question, num) => {
@@ -125,11 +105,7 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
         });
     }
 
-    deleteQuestion(data) {
-        // const removeQuestionList = [
-        //     ...this.state.questions.slice(0,data.index),
-        //     ...this.state.questions.slice(data.index + 1)
-        // ];
+    deleteQuestion = (data) => {
         this.setState(prevState => {
             return {
                 questions: prevState.questions.filter(el => el.index !== data.index)
@@ -137,7 +113,7 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
         });
     }
 
-    renderQuestionType (e) {
+    renderQuestionType = (e) => {
         //gets the value from the form and then updates state
         let component = e.target.value;
         this.setState({
@@ -146,6 +122,15 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
         });
         //sets the value of the select menu to question-type
         e.target.value = "question-type";
+    }
+
+    handleSubmitQuiz = () => {
+        let quiz = {
+            quizTitle: this.state.title,
+            questions: this.state.questions
+        }
+        console.log(JSON.stringify(quiz));
+        this.props.submitQuiz('/api/quizzes', quiz);
     }
 
     render() {
@@ -184,6 +169,8 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
                                             updateQuestion={this.updateQuestion}
                                             deleteQuestion={this.deleteQuestion}
                                         />
+                            default:
+                                break;
                         }
                     })}
                 </div>
@@ -200,10 +187,12 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
                                             updateQuiz={this.updateQuiz}
                                             length={this.state.questions.length}
                                         />;
-                            case "circuit":
-                                return <CircuitForm updateQuiz={this.updateQuiz}/>;
+                            // case "circuit":
+                            //     return <CircuitForm updateQuiz={this.updateQuiz}/>;
                             case "question-type":
                                 return;
+                            default:
+                                break;
                         }
                     })()}
                 </div>
@@ -212,11 +201,23 @@ case PlayerActionTypes.UPDATE_PLAYER_SCORE: {
                     <option value="question-type">Question Type...</option>
                     <option value="fill-in-blank">Fill In The Blank</option>
                     <option value="multiple-choice">Multiple Choice</option>
-                    <option value="circuit">Circuit</option>
+                    {/* <option value="circuit">Circuit</option> */}
                 </select>
+                <button onClick={this.handleSubmitQuiz}>Submit!</button>
+                <Link to="/admin"><button type="button" className="btn btn-primary">Back</button></Link>
             </div>
         )
     }
 }
 
-export default CreateQuiz;
+function mapStateToProps(state) {
+    const questions = state.QuestionReducer.questions;
+    return {
+        questions
+    }
+}
+
+
+export default connect(mapStateToProps,{
+    submitQuiz
+})(CreateQuiz);

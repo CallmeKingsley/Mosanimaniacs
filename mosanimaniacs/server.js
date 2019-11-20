@@ -7,8 +7,8 @@ const api = require('../mosanimaniacs/backend/routes/Api');
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ type: 'application/*+json' }))
 
 app.use('/api',api)
 

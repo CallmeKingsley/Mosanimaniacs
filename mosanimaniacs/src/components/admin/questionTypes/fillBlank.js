@@ -30,7 +30,6 @@ class FillBlankQuestion extends Component {
     }
 
     handleEdit() {
-        console.log(this.state.answerChoices);
         this.setState({isEdit: true});
     }
 
@@ -85,12 +84,11 @@ class FillBlankQuestion extends Component {
                             placeholder="Correct Answer" defaultValue={answer}/>
     
                             <button type="submit" className="save">Save</button>
-                            <button className="delete" onClick={deleteQuestion(this.state)}>Delete</button>
+                            <button className="delete" onClick={() => deleteQuestion(this.state)}>Delete</button>
                             <br/>
                         </div>
                     </fieldset>
                 </form>
-    
                 } else {
                     return  <div className={className}>
                                 <p><strong>Question:</strong>{question}</p>

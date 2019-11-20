@@ -8,6 +8,7 @@ import reduxThunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import QuestionReducer from './redux/reducers/index';
 import ScoreReducer from './redux/reducers/questions';
+import QuizzesReducer from './redux/reducers/quizzes';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -16,7 +17,8 @@ const middleware = applyMiddleware(reduxThunk);
 
 const quizGame = combineReducers({
     QuestionReducer,
-    ScoreReducer
+    ScoreReducer,
+    QuizzesReducer
 });
 
 const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
