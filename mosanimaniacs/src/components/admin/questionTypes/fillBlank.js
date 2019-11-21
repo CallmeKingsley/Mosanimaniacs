@@ -14,9 +14,11 @@ class FillBlankQuestion extends Component {
         this.state = {
             isEdit: false,
             type: "fill-in-blank",
-            question: "",
-            answer: "",
-            index: 0
+            Question: "",
+            Answer: "",
+            index: 0,
+            Attempted: false,
+            Correct: null
         }
     }
 

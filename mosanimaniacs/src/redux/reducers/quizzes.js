@@ -11,6 +11,11 @@ export default function GetQuizzes(state = INITIAL_STATE, action) {
                 ...state,
                 quizzes: action.payload.data
             }
+        case quizzes.DELETEQUIZ:
+            return {
+                ...state,
+                quizzes: state.questions.filter(el => el._id !== action.payload._id)
+            }
         default:
             return state;            
     }

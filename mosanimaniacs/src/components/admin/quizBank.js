@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import '../../css/Welcome.css';
-import { getAllQuizzes } from '../../redux/actions/quizAdmin';
+import { getAllQuizzes, deleteQuiz } from '../../redux/actions/quizAdmin';
 import {Link} from 'react-router-dom';
 import CreateQuiz from './createQuiz';
 
@@ -18,20 +18,9 @@ class QuizBank extends Component {
         }
     }
 
-    renderQuizzes = (quizzes) => {
-        return (
-            quizzes.map((quiz, index) => {
-                return  <div>
-                            <h3>{quiz.quizTitle}</h3>
-                            <Link to={`/admin/edit/${quiz._id}`}>
-                                <button type="button" className="btn btn-primary">
-                                    Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i>
-                                </button>
-                            </Link>
-                            <button className="btn btn-danger">Delete <i className="fa fa-trash" aria-hidden="true"></i></button>
-                        </div> 
-            })
-        )
+    handleDeleteQuiz = (url, id) => {
+        this.props.deleteQuiz(url, id);
+        window.location.href="/admin";
     }
 
     render() {
@@ -39,11 +28,8 @@ class QuizBank extends Component {
         return(
             <>
                 <h1>Admin Page</h1>
-                <h2>Select from the quizzes below to edit, or create a new quiz</h2>
+                <h2>Select from the quizzes below to edit, delete, or create a new quiz</h2>
                 <div id="renderedQuizzes">
-                    {/* {(() => {
-                        this.renderQuizzes()
-                    })()} */}
                     {/* Rendered quizzes will go here */}
                     {quizzes.map((quiz, index) => {
                                 return  <div>
@@ -53,6 +39,10 @@ class QuizBank extends Component {
                                                     Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
                                             </Link>
+                                            <button onClick={() => this.handleDeleteQuiz(`/api/quizzes/${quiz._id}`, quiz._id)} 
+                                            className="btn btn-danger">
+                                                Delete Quiz <i className="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
                                         </div> 
                             })
                         }
@@ -73,5 +63,6 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps, {
-    getAllQuizzes
+    getAllQuizzes,
+    deleteQuiz
 })(QuizBank);

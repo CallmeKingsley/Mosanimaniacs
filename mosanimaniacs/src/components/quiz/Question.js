@@ -47,7 +47,7 @@ class Question extends Component {
                     this.renderNavBtn(this.props.questions.length, this.props.index);
                 }} 
                 ref={this.nextQuestion}
-                to={`/quiz/question/${incIndex}`}>
+                to={`/quiz/dct/question/${incIndex}`}>
                     Next Question &rarr;
                 </Link>
             )
@@ -198,7 +198,7 @@ class Question extends Component {
                     <div className="question-points-section">
                         <div id="answers">
                             {
-                                selectedQuestion.Options.map((el,i) => (
+                                selectedQuestion.answerChoices.map((el,i) => (
                                     <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={(ref) => {
                                             this.answerChoice[i] = ref;
                                             return true;

@@ -31,11 +31,21 @@ export const getAllQuizzes = url => async (dispatch) => {
 export const updateQuiz = (url, response) => dispatch => {
     ax.post(url, response)
         .then(res => {
-            console.log(res.config.data);
             dispatch({
                 type: quizzes.UPDATEQUIZ,
                 payload: res.config.data
             })
         })
         .catch(err => console.log(err));
+}
+
+export const deleteQuiz = (url, id) => dispatch => {
+    console.log(url, id);
+    ax.delete(url, id)
+        .then(res => {
+            dispatch({
+                type: quizzes.DELETEQUIZ,
+                payload: res.config.data
+            });
+        });
 }

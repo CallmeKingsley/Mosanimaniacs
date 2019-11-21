@@ -18,7 +18,9 @@ class MultipleChoiceQuestion extends Component {
             answerChoices: [],
             correctAnswer: '',
             isEdit: false,
-            index: 0
+            index: 0,
+            Attempted: false,
+            Correct: null
           };
     }
 

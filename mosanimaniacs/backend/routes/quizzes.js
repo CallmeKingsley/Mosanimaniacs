@@ -134,4 +134,16 @@ router.post('/:quizId', (req, res) => {
   });
 });
 
+router.delete('/:quizId', (req, res) => {
+  const id = req.params.quizId;
+
+  Quiz.findOneAndRemove({_id: id}, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send();
+    }
+    return res.status(200).send();
+  });
+});
+
 module.exports = router;

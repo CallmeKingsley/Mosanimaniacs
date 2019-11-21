@@ -9,7 +9,7 @@ export default function UpdateQuestion(state = INITIAL_STATE, action) {
         case questions.GETQUESTIONS:
             return {
                 ...state,
-                questions: action.payload.data
+                questions: action.payload.data.questions
             }
         default:
             return state;            

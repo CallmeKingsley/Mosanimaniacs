@@ -121,6 +121,7 @@ class CreateQuiz extends Component {
         }
         console.log(JSON.stringify(quiz));
         this.props.submitQuiz('/api/quizzes', quiz);
+        window.location.href="/admin";
     }
 
     render() {

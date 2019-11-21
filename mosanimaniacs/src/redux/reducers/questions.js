@@ -12,7 +12,7 @@ export default function NewQestion(state = INITIAL_STATE, action) {
         case questions.GETQUESTIONS:
             return {
                 ...state,
-                responses: action.payload.data
+                responses: action.payload.data.questions
             }
         case questions.UPDATEATTEMPT:
             return {

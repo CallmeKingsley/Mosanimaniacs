@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import {getQuestions, getResponses} from '../../redux/actions/index';
+import { getAllQuizzes } from '../../redux/actions/quizAdmin';
 import '../../css/Quiz.css';
 
 class Quiz extends Component {
@@ -47,10 +48,11 @@ class Quiz extends Component {
                     <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
                         <img src={require('../../images/icon_CS.png')} alt="Codes and Safety"></img>
                     </a>
-                    <Link to="/quiz/start" className="course-button" onClick={() => {
-                        this.props.getQuestions('/api/questions');
-                        this.props.getResponses('/api/questions');
-                        }}>
+                    <Link to="/quiz/dct" className="course-button" onClick={() => {
+                        // this.props.getQuestions('/api/questions');
+                        // this.props.getResponses('/api/questions');
+                        this.props.getAllQuizzes('/api/quizzes');
+                    }}>
                         <img src={require('../../images/icon_DC.png')} alt="DC Theory"></img>
                     </Link>
                     <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
@@ -71,5 +73,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps,{
     getQuestions,
-    getResponses
+    getResponses,
+    getAllQuizzes
 })(Quiz);

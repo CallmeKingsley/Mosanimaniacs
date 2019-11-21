@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import '../../css/Welcome.css';
 import {Link} from 'react-router-dom';
-import { submitQuiz, getAllQuizzes, updateQuiz } from '../../redux/actions/quizAdmin';
+import { submitQuiz, getAllQuizzes, updateQuiz, deleteQuiz } from '../../redux/actions/quizAdmin';
 import MultiChoiceForm from './questionForms/multChoiceForm';
 import FillBlankForm from './questionForms/fillBlankForm';
 // import CircuitForm from './questionForms/circuitForm';
@@ -138,10 +138,16 @@ class EditQuiz extends Component {
         }
         console.log(quiz);
         this.props.updateQuiz(`/api/quizzes/${this.props.urlQuizId}`, quiz);
+        window.location.href="/admin";
+    }
+
+    handleDeleteQuiz = (url, id) => {
+        this.props.deleteQuiz(url, id);
+        window.location.href="/admin";
     }
 
     render() {
-        const { questions, questionTypes, questionSelectDisabled, titledisabled, title } = this.state;
+        const { questions, questionTypes, questionSelectDisabled, titledisabled, title, quizId } = this.state;
         return (
             <div id="welcome" className="container">
                 <h1 className="text-center">Create Quiz</h1>
@@ -211,6 +217,10 @@ class EditQuiz extends Component {
                     {/* <option value="circuit">Circuit</option> */}
                 </select>
                 <button onClick={this.handleUpdateQuiz}>Submit!</button>
+                <button onClick={() => this.handleDeleteQuiz(`/api/quizzes/${quizId}`, quizId)} 
+                className="btn btn-danger">
+                    Delete Quiz <i className="fa fa-trash" aria-hidden="true"></i>
+                </button>
                 <Link to="/admin"><button type="button" className="btn btn-primary">Back</button></Link>
             </div>
         )
@@ -233,5 +243,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     getAllQuizzes,
     submitQuiz,
-    updateQuiz
+    updateQuiz,
+    deleteQuiz
 })(EditQuiz);

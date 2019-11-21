@@ -12,11 +12,11 @@ class StartQuiz extends Component {
     render() {
         const { question, index } = this.props;
         if (this.props.question) {
-            console.log(question[index]._id);
+            console.log(question[index]);
         }
         return (
             <div id="start-quiz">
-                <Link className="course-link" to={`/quiz/question/${index}`} >Start Quiz</Link>
+                <Link className="course-link" to={`/quiz/dct/question/${index}`} >Start Quiz</Link>
             </div>
             
         )

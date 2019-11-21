@@ -1,0 +1,109 @@
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a0c"
+    },
+    "Question": "Ferromagnetic materials are materials that _____.",
+    "Answer": "Are easily magnetized",
+    "Correct": false,
+    "Points": 0,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a0d"
+    },
+    "Question": "Electromagnetic fields are formed by combining _____ and _____.",
+    "Answer": "Electrostatic fields; magnetic fields",
+    "Correct": false,
+    "Points": 0,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a0e"
+    },
+    "Question": "What is a stator?",
+    "Answer": "A device that converts mechanical energy into electrical energy",
+    "Correct": true,
+    "Points": 500,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a10"
+    },
+    "Question": "What would create a stronger magnetic field?",
+    "Answer": "Answers A and B",
+    "Correct": true,
+    "Points": 500,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a0f"
+    },
+    "Question": "Increasing the _____ in the wire that cuts a magnetic field will also increase the magnitude of _____ produced by electromagnetic induction.",
+    "Answer": "Number of loops; voltage",
+    "Correct": false,
+    "Points": 0,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a11"
+    },
+    "Question": "Increasing the current flowing through a conductor will _____ the strength of the electromagnetic field in that conductor.",
+    "Answer": "Increase",
+    "Correct": false,
+    "Points": 0,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a12"
+    },
+    "Question": "What can be increased in a DC generator by increasing the speed of the wire?",
+    "Answer": "Voltage",
+    "Correct": true,
+    "Points": 500,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a13"
+    },
+    "Question": "Circular mils are the units used to measure the ____.",
+    "Answer": "cross-sectional area of American conductors",
+    "Correct": false,
+    "Points": 0,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a14"
+    },
+    "Question": "What does the formula R=(K×L)/A calculate?",
+    "Answer": "Resistance of a wire or conductor",
+    "Correct": true,
+    "Points": 500,
+    "__v": 0
+}
+
+{
+    "_id": {
+        "$oid": "5dd42b5ec5c2d03044048a15"
+    },
+    "Question": "Lamps with the same value of resistance can have different wattage ratings if the _______ ratings are different.",
+    "Answer": "voltage",
+    "Correct": false,
+    "Points": 0,
+    "__v": 0
+}
