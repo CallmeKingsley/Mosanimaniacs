@@ -15,10 +15,17 @@ class StartQuiz extends Component {
             console.log(question[index]);
         }
         return (
-            <div id="start-quiz">
-                <Link className="course-link" to={`/quiz/dct/question/${index}`} >Start Quiz</Link>
-                <Link to="/"><button type="button" className="btn btn-secondary">Home</button></Link>
-            </div>
+            <section id="start-quiz">
+                <header>
+                    <h1 className="text-center">Click "Start Quiz" to Begin!</h1>
+                </header>
+                <div className="container startQuiz">
+                    <Link className="course-link" to={`/quiz/dct/question/${index}`} >
+                        <button className="btn btn-primary">Start Quiz</button>
+                    </Link>
+                    <Link to="/"><button type="button" className="btn btn-info returnHome">Home</button></Link>
+                </div>
+            </section>
             
         )
     }

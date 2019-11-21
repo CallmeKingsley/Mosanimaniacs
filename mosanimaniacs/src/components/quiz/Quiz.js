@@ -14,21 +14,10 @@ class Quiz extends Component {
         this.CourseBtn = React.createRef();
         this.CourseStart = React.createRef();
     }
-    // componentDidReceiveProps() {
-    //     this.setState({
-    //         questionId: this.props.question._id
-    //     })
-    // }
 
     showHideStart() {
         const courseButton = getComputedStyle(this.CourseBtn.current);
         const courseStart = getComputedStyle(this.CourseStart.current);
-        // if (courseStart.style.display === '') {
-        //     console.log('no show');
-        // } else {
-        //     console.log(courseStart.style.display);
-        // }
-        // console.log(courseStart.display);
         courseStart.display = 'block';
     }
 
@@ -39,27 +28,30 @@ class Quiz extends Component {
             console.log('oh no');
         }
         return (
-            <div>
-                <h1>Select a topic to begin!</h1>
-                <div className="topic-selection">
-                    <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
-                        <img src={require('../../images/icon_BP.png')} alt="Blueprints"></img>
-                    </a>
-                    <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
-                        <img src={require('../../images/icon_CS.png')} alt="Codes and Safety"></img>
-                    </a>
-                    <Link to="/quiz/dct" className="course-button" onClick={() => {
-                        // this.props.getQuestions('/api/questions');
-                        // this.props.getResponses('/api/questions');
-                        this.props.getAllQuizzes('/api/quizzes');
-                    }}>
-                        <img src={require('../../images/icon_DC.png')} alt="DC Theory"></img>
-                    </Link>
-                    <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
-                        <img src={require('../../images/icon_JI.png')} alt="Job Information"></img>
-                    </a>
+            <section id="topicSelect">
+                <header>
+                    <h1 className="text-center">Select a topic to begin!</h1>
+                </header>
+                <div className="container">
+                    <div className="topic-selection">
+                        <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
+                            <img src={require('../../images/icon_BP.png')} alt="Blueprints"></img>
+                        </a>
+                        <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
+                            <img src={require('../../images/icon_CS.png')} alt="Codes and Safety"></img>
+                        </a>
+                        <Link to="/quiz/dct" className="course-button" onClick={() => {
+                            this.props.getAllQuizzes('/api/quizzes');
+                        }}>
+                            <img src={require('../../images/icon_DC.png')} alt="DC Theory"></img>
+                        </Link>
+                        <a href="https://giphy.com/gifs/spooky-MgRqsW4PKuYTK" target="_blank">
+                            <img src={require('../../images/icon_JI.png')} alt="Job Information"></img>
+                        </a>
+                    </div>
+                    <Link to="/"><button type="button" className="btn btn-info returnHome">Home</button></Link>
                 </div>
-            </div>
+            </section>
         )
     }
 }

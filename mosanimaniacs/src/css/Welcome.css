@@ -35,7 +35,10 @@
     color: #8d8e8d;
 }
 
-#quizBank {
+#quizBank,
+#editQuiz,
+#topicSelect,
+#start-quiz {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(360deg, rgba(39,96,94,1) 43%, rgba(216,229,208,1) 100%);
@@ -55,7 +58,7 @@
 
 #renderedQuizzes .quiz{
     max-width: 203px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 header {
@@ -68,4 +71,31 @@ header {
 
 header h1 {
     margin: 20px;
+}
+
+.topic-selection {
+    margin: 100px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.returnHome {
+    position: absolute;
+    left: 48%;
+}
+
+.chooseQuiz {
+    display: flex;
+    justify-content: center;
+}
+
+.chooseQuiz button {
+    margin: 20px;
+}
+
+.startQuiz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

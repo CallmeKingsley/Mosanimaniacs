@@ -14,6 +14,7 @@ class FillBlankForm extends Component {
     handleSubmitQuestion(e) {
         e.preventDefault();
         let stuff = [this.question.current.value,this.answer.current.value];
+        console.log(stuff);
         let otherStuff = {
             type: "fill-in-blank",
             question: this.question.current.value,

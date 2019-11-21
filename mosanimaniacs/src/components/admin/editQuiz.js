@@ -149,8 +149,11 @@ class EditQuiz extends Component {
     render() {
         const { questions, questionTypes, questionSelectDisabled, titledisabled, title, quizId } = this.state;
         return (
-            <div id="welcome" className="container">
-                <h1 className="text-center">Create Quiz</h1>
+            <section id="editQuiz">
+                <header>
+                    <h1 className="text-center">Create Quiz</h1>
+                </header>
+                <div className="container">
                 <form onSubmit={this.handleSubmitTitle}>
                     <fieldset>
                         <input type="text" name="quizTitle" id="quizTitle" onChange={this.handleChangeTitle} disabled={titledisabled} defaultValue={title}/>
@@ -222,7 +225,8 @@ class EditQuiz extends Component {
                     Delete Quiz <i className="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <Link to="/admin"><button type="button" className="btn btn-primary">Back</button></Link>
-            </div>
+                </div>
+            </section>
         )
     }
 }

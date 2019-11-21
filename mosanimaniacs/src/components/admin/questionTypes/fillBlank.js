@@ -24,6 +24,7 @@ class FillBlankQuestion extends Component {
 
     componentDidMount() {
         const { index, question, answer } = this.props;
+        console.log(question, answer);
         this.setState({
             question,
             correctAnswer: answer,

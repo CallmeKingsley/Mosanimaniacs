@@ -14,14 +14,15 @@ class SelectQuiz extends Component {
     render() {
         const { quizzes } = this.props;
         return (
-            // <div id="start-quiz">
-            //     <Link className="course-link" to={`/quiz/dct/question/${index}`} >Start Quiz</Link>
-            // </div>
-            <div id="renderedQuizzes">
+            <section id="renderedQuizzes">
                 {/* Rendered quizzes will go here */}
-                {quizzes.map((quiz, index) => {
-                    return  <div>
-                                <Link to={"/quiz/dct/start"} onClick={() => {
+                <header>
+                    <h1 className="text-center">Which quiz would you like to take?</h1>
+                </header>
+                <div className="container">
+                    <div className="chooseQuiz">
+                    {quizzes.map((quiz, index) => {
+                    return  <Link to={"/quiz/dct/start"} onClick={() => {
                                     this.props.getQuestions(`/api/quizzes/${quiz._id}`);
                                     this.props.getResponses(`/api/quizzes/${quiz._id}`);
                                     this.props.getAllQuizzes('/api/quizzes');
@@ -30,11 +31,12 @@ class SelectQuiz extends Component {
                                         <h3>{quiz.quizTitle}</h3>
                                     </button>
                                 </Link>
-                            </div> 
                         })
                     }
-            </div>
-        
+                    </div>
+                    <Link to="/"><button type="button" className="btn btn-info returnHome">Home</button></Link>
+                </div>
+            </section>        
         )
     }
 }

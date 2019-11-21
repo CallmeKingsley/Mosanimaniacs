@@ -243,7 +243,7 @@ class Question extends Component {
                                                 <div className="answer">
                                                     <input type="text" name="answer" placeholder="Answer" />
                                                 </div>
-                                                <button type="submit">Submit Answer!</button>
+                                                <button type="submit" className="question-btn">Submit Answer!</button>
                                             </form>
                                 }
                             })()}
