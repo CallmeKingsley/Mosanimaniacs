@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.btn.btn-primary{
+#welcome .btn.btn-primary{
     background-color:#8d8e8d;
     border: 1px solid #8d8e8d;
     color: #464646;
@@ -21,7 +21,7 @@
     font-size: 25px;
 }
 
-.btn.btn-info {
+#welcome .btn.btn-info {
     position: absolute;
     top:750px;
     right: 700px;
@@ -29,11 +29,43 @@
     font-size: 25px;
 }
 
-.btn.btn-primary:hover{
+#welcome .btn.btn-primary:hover{
     background-color:#464646;
     border: 2px solid #8d8e8d;
     color: #8d8e8d;
 }
 
+#quizBank {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(360deg, rgba(39,96,94,1) 43%, rgba(216,229,208,1) 100%);
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+}
 
+#quizBank .navBtns {
+    max-width: 221px;
+    margin: 30px auto;
+}
 
+#quizBank .navBtns a{
+    margin: 10px;
+}
+
+#renderedQuizzes .quiz{
+    max-width: 203px;
+    margin: 0 auto;
+}
+
+header {
+    padding: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #464646;
+    color: white;
+}
+
+header h1 {
+    margin: 20px;
+}
