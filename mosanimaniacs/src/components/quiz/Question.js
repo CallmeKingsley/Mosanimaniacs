@@ -197,7 +197,7 @@ class Question extends Component {
                 this.setState({
                     attempted: true,
                     correct: false,
-                    message: `That's not it. The correct answer is ${correctAnswer}. Select the next question button to continue.`
+                    message: `That's not it. The correct answer is "${correctAnswer}". Select the next question button to continue.`
                 });
                 this.revealAnswer(false);
             }
