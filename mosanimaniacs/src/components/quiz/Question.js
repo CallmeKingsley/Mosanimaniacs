@@ -11,6 +11,7 @@ class Question extends Component {
         this.timer = 0;
         this.answerChoice = [];
         this.nextQuestion = React.createRef();
+        this.submitAnswer = React.createRef();
         this.state = {
             total: 500,
             seconds: 30,
@@ -29,7 +30,7 @@ class Question extends Component {
         const points = this.state.correct ? this.state.total : 0;
         if (totalNum === currNum) {
             return (
-                <Link className="course-link question-btn"
+                <Link className="course-link finish-quiz"
                 to={'/quiz/results'} 
                 onClick={() => {
                         this.props.updatePlayerAttempts(this.state.attempted,this.state.correct,this.props.index,points);
@@ -55,6 +56,7 @@ class Question extends Component {
     }
 
     resetQuestion = (bool) => {
+        const { selectedQuestion } = this.props;
 
         if (bool) {
             const {attempted, correct, total} = this.state;
@@ -69,9 +71,11 @@ class Question extends Component {
             });
             this.nextQuestion.current.classList.add("next-disabled");
         }
-        this.answerChoice.forEach(el => {
-            el.classList.remove("correct", "incorrect", "choice-disabled");
-        });
+        if (selectedQuestion.type === "multiple-choice") {
+            this.answerChoice.forEach(el => {
+                el.classList.remove("correct", "incorrect", "choice-disabled");
+            });    
+        }
         this.timer = 0;
         this.startTimer();
     }
@@ -140,16 +144,28 @@ class Question extends Component {
                     el.classList.add("correct");
                 }
             });    
+        } else if (selectedQuestion.type === "fill-in-blank") {
+            this.submitAnswer.current.classList.add('choice-disabled');
         }
         if (bool) {
             this.nextQuestion.current.classList.remove("next-disabled");
-            this.setState({
-                attempted: true,
-                seconds: 0,
-
-                correct: false,
-                message: "Time's up! Here is the correct answer. Select the next question button to continue."
-            });
+            if (selectedQuestion.type === "multiple-choice") {
+                this.setState({
+                    attempted: true,
+                    seconds: 0,
+    
+                    correct: false,
+                    message: "Time's up! Here is the correct answer. Select the next question button to continue."
+                });    
+            } else if (selectedQuestion.type === "fill-in-blank") {
+                this.setState({
+                    attempted: true,
+                    seconds: 0,
+    
+                    correct: false,
+                    message: `Time's up! The correct answer is "${correctAnswer}". Select the next question button to continue.`
+                });    
+            }
             clearInterval(this.timer);
         }
     }
@@ -201,7 +217,6 @@ class Question extends Component {
                 });
                 this.revealAnswer(false);
             }
-            this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
         }
         clearInterval(this.timer);
         if (index !== questions.length - 1) {
@@ -241,9 +256,9 @@ class Question extends Component {
                                 } else if (selectedQuestion.type === 'fill-in-blank') {
                                     return  <form onSubmit={this.checkAnswer}>
                                                 <div className="answer">
-                                                    <input type="text" name="answer" placeholder="Answer" />
+                                                    <input type="text" name="answer" className="studentAnswer" placeholder="Answer" />
                                                 </div>
-                                                <button type="submit" className="question-btn">Submit Answer!</button>
+                                                <button type="submit" className="submit-btn" ref={this.submitAnswer}>Submit Answer!</button>
                                             </form>
                                 }
                             })()}

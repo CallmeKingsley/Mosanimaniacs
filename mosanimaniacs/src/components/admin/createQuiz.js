@@ -126,8 +126,11 @@ class CreateQuiz extends Component {
     render() {
         const { questions, questionTypes, questionSelectDisabled, titledisabled } = this.state;
         return (
+            <section id="createQuiz">
+                <header>
+                    <h1 className="text-center">Create Quiz</h1>
+                </header>
             <div className="container">
-                <h1 className="text-center">Create Quiz</h1>
                 <form onSubmit={this.handleSubmitTitle}>
                     <fieldset>
                         <input type="text" name="quizTitle" id="quizTitle" disabled={titledisabled}/>
@@ -196,6 +199,7 @@ class CreateQuiz extends Component {
                 <button onClick={this.handleSubmitQuiz}>Submit!</button>
                 <Link to="/admin"><button type="button" className="btn btn-secondary">Back</button></Link>
             </div>
+            </section>
         )
     }
 }

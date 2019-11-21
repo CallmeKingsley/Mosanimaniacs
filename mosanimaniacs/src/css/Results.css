@@ -1,5 +1,9 @@
+#quizResults table {
+    width: 100%;
+}
+
 th, td {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 5px;
     font-family: 'Open Sans', sans-serif;
 }

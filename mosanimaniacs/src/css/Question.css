@@ -248,7 +248,13 @@
     color: #70A9A2;
 }
 
-.question-btn {
+.hide {
+    display: none;
+}
+
+.question-btn,
+.submit-btn,
+.finish-quiz {
     display: flex;
     align-items: center;
     background-color: #40798C;
@@ -303,4 +309,17 @@
     position: absolute;
     bottom: 50px;
     right: 470px;
+}
+
+.submit-btn {
+    transform: translateY(-370px);
+}
+
+.studentAnswer {
+    width: 250px;
+    font-size:1.5rem;
+}
+
+.finish-quiz {
+    transform: translate(-60px,15px);
 }

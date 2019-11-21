@@ -170,7 +170,7 @@ class EditQuiz extends Component {
                                             key={i}
                                             index={i}
                                             question={el.question}
-                                            answer={el.answer}
+                                            answer={el.correctAnswer}
                                             updateQuestion={this.updateQuestion}
                                             deleteQuestion={this.deleteQuestion}
                                         />

@@ -31,7 +31,7 @@ class QuizBank extends Component {
                 </header>
                 <div className="container">
                     <h2 className="text-center mb-5">Select from the quizzes below to edit, delete, or create a new quiz.</h2>
-                    <div id="renderedQuizzes">
+                    <div id="rendered-quizzes">
                         {/* Rendered quizzes will go here */}
                         {quizzes.map((quiz, index) => {
                                     return  <div className="quiz">
