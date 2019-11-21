@@ -48,6 +48,7 @@ class QuizBank extends Component {
                         }
                 </div>
                 <Link to="/admin/create"><button type="button" className="btn btn-primary">Create Quiz</button></Link>
+                <Link to="/"><button type="button" className="btn btn-info">Home</button></Link>
             </>
         )
     }

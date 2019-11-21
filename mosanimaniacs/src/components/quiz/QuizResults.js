@@ -30,8 +30,8 @@ class QuizResults extends Component {
                                 questions.map((el,i) => (
                                     <tr key={i} className={el.Correct ? "correct" : "incorrect"}>
                                         <td>{i + 1}</td>
-                                        <td>{el.Question}</td>
-                                        <td>{el.Answer}</td>
+                                        <td>{el.question}</td>
+                                        <td>{el.correctAnswer}</td>
                                         <td>{el.Correct ? "Y" : "N"}</td>
                                         <td>{el.Points}</td>
                                     </tr>

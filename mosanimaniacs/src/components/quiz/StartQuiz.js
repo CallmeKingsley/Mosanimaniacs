@@ -17,6 +17,7 @@ class StartQuiz extends Component {
         return (
             <div id="start-quiz">
                 <Link className="course-link" to={`/quiz/dct/question/${index}`} >Start Quiz</Link>
+                <Link to="/"><button type="button" className="btn btn-info">Home</button></Link>
             </div>
             
         )

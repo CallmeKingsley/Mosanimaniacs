@@ -23,6 +23,7 @@ class MultipleChoiceForm extends Component {
     handleSubmitQuestion(e) {
         e.preventDefault();
         e.persist();
+        let correctAnswer;
         const inputs = e.target.getElementsByTagName('input');
         const answerChoices = [
             inputs.answerChoice0.value,
@@ -30,21 +31,24 @@ class MultipleChoiceForm extends Component {
             inputs.answerChoice2.value,
             inputs.answerChoice3.value
         ];
+        answerChoices.reduce((acc,el,i) => {
+            if (i === this.state.correctAnswer) {
+                correctAnswer = el;
+            }
+        },"");
         this.setState({
             question: inputs.questionTitle.value,
             answerChoices: answerChoices,
-            correctAnswer: answerChoices.reduce((acc,el,i) => {
-                if (i === this.state.correctAnswer) {
-                    return el;
-                }
-            },"")
+            correctAnswer: correctAnswer
         }, () => {
             this.props.updateQuiz(this.state);
         });
     }
 
     handleCorrectAnswer(e) {
-        this.setState({correctAnswer: parseInt(e.target.id)});
+        this.setState({
+            correctAnswer: parseInt(e.target.id)
+        });
     }
 
     render() {

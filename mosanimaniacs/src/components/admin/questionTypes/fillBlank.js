@@ -15,7 +15,7 @@ class FillBlankQuestion extends Component {
             isEdit: false,
             type: "fill-in-blank",
             Question: "",
-            Answer: "",
+            correctAnswer: "",
             index: 0,
             Attempted: false,
             Correct: null
@@ -26,7 +26,7 @@ class FillBlankQuestion extends Component {
         const { index, question, answer } = this.props;
         this.setState({
             question,
-            answer,
+            correctAnswer: answer,
             index
         })
     }
@@ -40,7 +40,7 @@ class FillBlankQuestion extends Component {
         this.setState({
             isEdit: false,
             question: this.question.current.value,
-            answer: this.answer.current.value,
+            correctAnswer: this.answer.current.value,
         },() => {
             this.props.updateQuestion(this.state);
         });
@@ -63,12 +63,12 @@ class FillBlankQuestion extends Component {
         }
         this.setState({
             question: newQuestion,
-            answer: newAnswer
+            correctAnswer: newAnswer
         })
     }
 
     render() {
-        const { question, answer, isEdit } = this.state;
+        const { question, correctAnswer, isEdit } = this.state;
         const { className, deleteQuestion } = this.props;
         return (
             <>
@@ -83,7 +83,7 @@ class FillBlankQuestion extends Component {
     
                             <input type="text" name="correctAnswer" ref={this.answer}
                             className="correctAnswer" onChange={this.handleEditQuestion}
-                            placeholder="Correct Answer" defaultValue={answer}/>
+                            placeholder="Correct Answer" defaultValue={correctAnswer}/>
     
                             <button type="submit" className="save">Save</button>
                             <button className="delete" onClick={() => deleteQuestion(this.state)}>Delete</button>
@@ -94,7 +94,7 @@ class FillBlankQuestion extends Component {
                 } else {
                     return  <div className={className}>
                                 <p><strong>Question:</strong>{question}</p>
-                                <p><strong>Answer:</strong>{answer}</p>
+                                <p><strong>Answer:</strong>{correctAnswer}</p>
                                 <button onClick={this.handleEdit}>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button>
                                 <button className="delete" onClick={() => deleteQuestion(this.state)}>Delete</button>
                             </div>

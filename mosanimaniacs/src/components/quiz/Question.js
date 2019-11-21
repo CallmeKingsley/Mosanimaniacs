@@ -129,16 +129,18 @@ class Question extends Component {
     }
 
     revealAnswer = (bool) => {
-        let {index, questions} = this.props;
-        let correctAnswer = questions[index].Answer;
-        this.answerChoice.forEach(el => {
-            el.classList.add('choice-disabled');
-            let text = el.textContent;
-            text = text.substring(1);
-            if (text === correctAnswer) {
-                el.classList.add("correct");
-            }
-        });
+        let {index, questions, selectedQuestion} = this.props;
+        let correctAnswer = questions[index].correctAnswer;
+        if (selectedQuestion.type === "multiple-choice") {
+            this.answerChoice.forEach(el => {
+                el.classList.add('choice-disabled');
+                let text = el.textContent;
+                text = text.substring(1);
+                if (text === correctAnswer) {
+                    el.classList.add("correct");
+                }
+            });    
+        }
         if (bool) {
             this.nextQuestion.current.classList.remove("next-disabled");
             this.setState({
@@ -153,27 +155,54 @@ class Question extends Component {
     }
 
     checkAnswer = (e) => {
-        let selectedAnswer = e.target.dataset.answer;
-        let {index, questions} = this.props;
-        let correctAnswer = questions[index].Answer;
-        if (selectedAnswer == correctAnswer) {
-            e.target.classList.add('correct');
-            this.props.updateScore(this.state.total);
-            this.setState({
-                attempted: true,
-                correct: true,
-                message: "Great job! Select the next question button to continue."
-            });
-        } else {
-            e.target.classList.add('incorrect');
-            this.setState({
-                attempted: true,
-                correct: false,
-                message: "That's not it. Here's the correct answer. Select the next question button to continue."
-            });
-            this.revealAnswer(false);
+        e.preventDefault();
+        const { selectedQuestion } = this.props;
+        let selectedAnswer; 
+        if (selectedQuestion.type === "multiple-choice") {
+            selectedAnswer = e.target.dataset.answer;
+        } else if (selectedQuestion.type === "fill-in-blank") {
+            selectedAnswer = e.target.answer.value;
         }
-        this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
+        let {index, questions} = this.props;
+        let correctAnswer = questions[index].correctAnswer;
+
+        if (selectedQuestion.type === "multiple-choice") {
+            if (selectedAnswer == correctAnswer) {
+                e.target.classList.add('correct');
+                this.props.updateScore(this.state.total);
+                this.setState({
+                    attempted: true,
+                    correct: true,
+                    message: "Great job! Select the next question button to continue."
+                });
+            } else {
+                e.target.classList.add('incorrect');
+                this.setState({
+                    attempted: true,
+                    correct: false,
+                    message: "That's not it. Here's the correct answer. Select the next question button to continue."
+                });
+                this.revealAnswer(false);
+            }
+            this.answerChoice.forEach(el => el.classList.add('choice-disabled'));    
+        } else if (selectedQuestion.type === "fill-in-blank") {
+            if (selectedAnswer.toUpperCase() == correctAnswer.toUpperCase()) {
+                this.props.updateScore(this.state.total);
+                this.setState({
+                    attempted: true,
+                    correct: true,
+                    message: "Great job! Select the next question button to continue."
+                });
+            } else {
+                this.setState({
+                    attempted: true,
+                    correct: false,
+                    message: `That's not it. The correct answer is ${correctAnswer}. Select the next question button to continue.`
+                });
+                this.revealAnswer(false);
+            }
+            this.answerChoice.forEach(el => el.classList.add('choice-disabled'));
+        }
         clearInterval(this.timer);
         if (index !== questions.length - 1) {
             this.nextQuestion.current.classList.remove("next-disabled");
@@ -193,21 +222,31 @@ class Question extends Component {
                         </div>
                      </div>
                     <div className="navyBlue">
-                        <h2 className="quizText">{selectedQuestion.Question}</h2>
+                        <h2 className="quizText">{selectedQuestion.question}</h2>
                     </div>
                     <div className="question-points-section">
                         <div id="answers">
-                            {
-                                selectedQuestion.answerChoices.map((el,i) => (
-                                    <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={(ref) => {
-                                            this.answerChoice[i] = ref;
-                                            return true;
-                                        }}>
-                                        <div className="circle" key={i}>{this.incrementOptionIndex(i)}</div>
-                                        <p className="quizText">{el}</p>
-                                    </div>
+                            {(() => {
+                                if (selectedQuestion.type === 'multiple-choice') {
+                                    return selectedQuestion.answerChoices.map((el,i) => (
+                                        <div className="answer" onClick={(e) => this.checkAnswer(e)} data-answer={el} ref={(ref) => {
+                                                this.answerChoice[i] = ref;
+                                                return true;
+                                            }}>
+                                            <div className="circle" key={i}>{this.incrementOptionIndex(i)}</div>
+                                            <p className="quizText">{el}</p>
+                                        </div>
+                                    )
                                 )
-                            )}
+                                } else if (selectedQuestion.type === 'fill-in-blank') {
+                                    return  <form onSubmit={this.checkAnswer}>
+                                                <div className="answer">
+                                                    <input type="text" name="answer" placeholder="Answer" />
+                                                </div>
+                                                <button type="submit">Submit Answer!</button>
+                                            </form>
+                                }
+                            })()}
                         </div>
                         <div id="time">
                             <div id="countdown">
