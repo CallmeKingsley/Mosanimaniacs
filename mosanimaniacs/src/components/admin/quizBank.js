@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import '../../css/Welcome.css';
 import { getAllQuizzes, deleteQuiz } from '../../redux/actions/quizAdmin';
 import {Link} from 'react-router-dom';
 import CreateQuiz from './createQuiz';
@@ -28,14 +27,14 @@ class QuizBank extends Component {
         return(
             <>
                 <h1>Admin Page</h1>
-                <h2>Select from the quizzes below to edit, delete, or create a new quiz</h2>
+                <h2>Select from the quizzes below to edit, delete, or create a new quiz.</h2>
                 <div id="renderedQuizzes">
                     {/* Rendered quizzes will go here */}
                     {quizzes.map((quiz, index) => {
                                 return  <div>
                                             <h3>{quiz.quizTitle}</h3>
                                             <Link to={`/admin/edit/${quiz._id}`}>
-                                                <button type="button" className="btn btn-primary">
+                                                <button type="button" className="btn btn-warning">
                                                     Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
                                             </Link>

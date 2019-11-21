@@ -26,7 +26,7 @@ class SelectQuiz extends Component {
                                     this.props.getResponses(`/api/quizzes/${quiz._id}`);
                                     this.props.getAllQuizzes('/api/quizzes');
                                 }}>
-                                    <button type="button" className="btn btn-primary">
+                                    <button type="button" className="btn btn-success">
                                         <h3>{quiz.quizTitle}</h3>
                                     </button>
                                 </Link>

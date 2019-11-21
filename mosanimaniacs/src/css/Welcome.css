@@ -1,8 +1,39 @@
 #welcome{
-    margin-top: 300px;
+    background-image:url("../images/Welcome_Screen.png");
+    background-size: cover;
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.btn.btn-primary{
+    background-color:#8d8e8d;
+    border: 1px solid #8d8e8d;
+    color: #464646;
+    position: absolute;
+    top:750px;
+    right: 900px;
+    width: 150px;
+    height: 100px;
+    border-radius: 13px;
+    font-size: 25px;
+}
+
+.btn.btn-info {
+    position: absolute;
+    top:750px;
+    right: 700px;
+    border-radius: 13px;
+    font-size: 25px;
+}
+
+.btn.btn-primary:hover{
+    background-color:#464646;
+    border: 2px solid #8d8e8d;
+    color: #8d8e8d;
 }
 
 
-.startBtn{
-    margin-top: 2rem;
-}
+

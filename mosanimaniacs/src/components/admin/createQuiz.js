@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import '../../css/Welcome.css';
 import {Link} from 'react-router-dom';
 import { submitQuiz } from '../../redux/actions/quizAdmin';
 import MultiChoiceForm from './questionForms/multChoiceForm';
@@ -127,7 +126,7 @@ class CreateQuiz extends Component {
     render() {
         const { questions, questionTypes, questionSelectDisabled, titledisabled } = this.state;
         return (
-            <div id="welcome" className="container">
+            <div className="container">
                 <h1 className="text-center">Create Quiz</h1>
                 <form onSubmit={this.handleSubmitTitle}>
                     <fieldset>
@@ -195,7 +194,7 @@ class CreateQuiz extends Component {
                     {/* <option value="circuit">Circuit</option> */}
                 </select>
                 <button onClick={this.handleSubmitQuiz}>Submit!</button>
-                <Link to="/admin"><button type="button" className="btn btn-primary">Back</button></Link>
+                <Link to="/admin"><button type="button" className="btn btn-secondary">Back</button></Link>
             </div>
         )
     }

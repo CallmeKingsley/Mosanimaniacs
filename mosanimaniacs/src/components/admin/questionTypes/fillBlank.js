@@ -96,7 +96,9 @@ class FillBlankQuestion extends Component {
                                 <p><strong>Question:</strong>{question}</p>
                                 <p><strong>Answer:</strong>{correctAnswer}</p>
                                 <button onClick={this.handleEdit}>Edit&nbsp;&nbsp;<i className="fa fa-pencil" aria-hidden="true"></i></button>
-                                <button className="delete" onClick={() => deleteQuestion(this.state)}>Delete</button>
+                                <button className="delete" onClick={() => deleteQuestion(this.state)}>
+                                    Delete<i className="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                             </div>
     
                 }

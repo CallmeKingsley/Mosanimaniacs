@@ -6,10 +6,6 @@ import {Link} from 'react-router-dom';
 
 class Welcome extends Component {
 
-    componentDidMount() {
-        // this.props.getAllQuizzes('/api/quizzes');
-    }
-
     render() {
         return (
             <div id="welcome">
@@ -21,10 +17,7 @@ class Welcome extends Component {
                 <div className="row">
                     <div className="col-sm text-center startBtn">
                         <Link to ="/quiz"><button type="button" className="btn btn-primary">START GAME</button></Link>
-                        <Link to ="/admin" /*onClick={() => {
-                            console.log('hey');
-                            this.props.getAllQuizzes('/api/quizzes');
-                        }}*/><button type="button" className="btn btn-primary">ADMIN</button></Link>
+                        <Link to ="/admin"><button type="button" className="btn btn-info">ADMIN</button></Link>
                     </div>
                 </div>
             </div>
